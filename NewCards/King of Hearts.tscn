@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwf5wcxl5fi4f"]
+
+[ext_resource type="Script" uid="uid://1oiu3jpvjn26" path="res://addons/CardGameSkeleton/CardLibrary/Card.gd" id="1_cu4mo"]
+
+[node name="AbstractCard" type="Node2D"]
+script = ExtResource("1_cu4mo")
+card_name = "King of Hearts"
+attributes = {
+"Back Face": "res://NewCards/BackFace.png",
+"Card Name": "King of Hearts",
+"Front Face": "res://NewCards/KingOfHearts.png",
+"Rank": 13.0,
+"Scene Location": "res://NewCards/",
+"Suit": "Hearts"
+}
+
+[node name="CardFront" type="Sprite2D" parent="."]
+
+[node name="CardBack" type="Sprite2D" parent="."]

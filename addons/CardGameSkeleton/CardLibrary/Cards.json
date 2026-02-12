@@ -1,0 +1,18 @@
+{
+	"King of Hearts": {
+		"Back Face": "res://NewCards/BackFace.png",
+		"Card Name": "King of Hearts",
+		"Front Face": "res://NewCards/KingOfHearts.png",
+		"Rank": 13.0,
+		"Scene Location": "res://NewCards/",
+		"Suit": "Hearts"
+	},
+	"Queen of Hearts": {
+		"Back Face": "res://NewCards/BackFace.png",
+		"Card Name": "Queen of Hearts",
+		"Front Face": "res://NewCards/QueenOfHearts.png",
+		"Rank": 12.0,
+		"Scene Location": "res://NewCards/",
+		"Suit": "Hearts"
+	}
+}
