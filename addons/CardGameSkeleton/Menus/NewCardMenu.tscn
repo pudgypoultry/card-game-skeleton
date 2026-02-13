@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ky05a2wvdijt" path="res://addons/CardGameSkeleton/Menus/NewCardMenu.gd" id="1_rnt8f"]
 [ext_resource type="PackedScene" uid="uid://dqkm4gg7p68af" path="res://addons/CardGameSkeleton/Menus/AttributeField.tscn" id="2_y527x"]
 [ext_resource type="Script" uid="uid://chbsf4oc2bglf" path="res://addons/CardGameSkeleton/CardLibrary/SaveCard.gd" id="3_vbpew"]
-[ext_resource type="PackedScene" uid="uid://dscpfc825fla0" path="res://addons/CardGameSkeleton/AbstractCard2D.tscn" id="4_1ic80"]
+[ext_resource type="PackedScene" uid="uid://dscpfc825fla0" path="res://addons/CardGameSkeleton/Resources/AbstractCard2D.tscn" id="4_1ic80"]
 
 [node name="NewCardMenu" type="MarginContainer" node_paths=PackedStringArray("fields_container")]
 visible = false

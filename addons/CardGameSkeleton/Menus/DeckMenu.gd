@@ -23,8 +23,6 @@ func populate_grid() -> void:
 	
 	# Clear old buttons
 	for child in grid_container.get_children():
-		if child.name == "BackToMainMenu" or child.name == "NewDeck":
-			continue
 		child.queue_free()
 		
 	var decks = card_library.get_deck_dict()
@@ -40,7 +38,7 @@ func populate_grid() -> void:
 		btn.expand_icon = true
 		
 		var deck_data = decks[deck_name]
-		var final_icon = preload("res://addons/CardGameSkeleton/Images/Decks.png")
+		var final_icon = preload("res://icon.svg")
 		
 		if deck_data is Dictionary and deck_data.has("image"):
 			var img_path = deck_data["image"]

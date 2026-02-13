@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b13enk8cvhrj1" path="res://addons/CardGameSkeleton/Menus/EditCardMenu.gd" id="1_0xsnf"]
 [ext_resource type="PackedScene" uid="uid://dqkm4gg7p68af" path="res://addons/CardGameSkeleton/Menus/AttributeField.tscn" id="2_wjoui"]
-[ext_resource type="PackedScene" uid="uid://dscpfc825fla0" path="res://addons/CardGameSkeleton/AbstractCard2D.tscn" id="4_ur6yf"]
+[ext_resource type="PackedScene" uid="uid://dscpfc825fla0" path="res://addons/CardGameSkeleton/Resources/AbstractCard2D.tscn" id="4_ur6yf"]
 
 [node name="EditCardMenu" type="MarginContainer" node_paths=PackedStringArray("fields_container")]
 anchors_preset = 10

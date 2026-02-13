@@ -48,7 +48,7 @@ func populate_grid() -> void:
 		btn.text = card_name
 		btn.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		btn.vertical_icon_alignment = VERTICAL_ALIGNMENT_TOP
-		btn.custom_minimum_size = Vector2(120, 160)
+		btn.custom_minimum_size = Vector2(140, 180)
 		btn.expand_icon = true
 		btn.clip_text = true
 		
