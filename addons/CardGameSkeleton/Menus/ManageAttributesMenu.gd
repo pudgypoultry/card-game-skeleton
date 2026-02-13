@@ -108,6 +108,7 @@ func _create_list_row(attr: CardAttribute, index: int) -> void:
 	del_btn.text = "X"
 	# We bind the index so the button knows which item to delete
 	del_btn.pressed.connect(_on_delete_pressed.bind(index))
+	del_btn.set_modulate(Color(1,0,0))
 	row.add_child(del_btn)
 	
 	attribute_list_container.add_child(row)

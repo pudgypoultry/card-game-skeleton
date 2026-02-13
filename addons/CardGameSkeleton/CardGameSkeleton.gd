@@ -5,7 +5,7 @@ var toolbar
 
 func _enable_plugin() -> void:
 	# Add autoloads here.
-	toolbar = preload("res://addons/CardGameSkeleton/Sandbox.tscn").instantiate()
+	toolbar = preload("res://addons/CardGameSkeleton/CardGameSkeleton.tscn").instantiate()
 	#add_control_to_container(EditorPlugin.CONTAINER_TOOLBAR, toolbar)
 	#add_control_to_bottom_panel(toolbar, "Card Game Skeleton")
 	add_control_to_dock(EditorPlugin.DOCK_SLOT_LEFT_UL, toolbar)

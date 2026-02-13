@@ -3,8 +3,6 @@ extends Button
 
 @export var card_json_manager: CardLibrary
 @export var card_scene: PackedScene
-
-## The container holding all the AttributeField instances
 @export var fields_container: VBoxContainer
 
 func on_pressed() -> void:
@@ -42,5 +40,4 @@ func on_pressed() -> void:
 	
 	print("Saved card: " + new_card.card_name)
 	
-	# Optional: Free the instance since we saved it to disk
 	new_card.queue_free()

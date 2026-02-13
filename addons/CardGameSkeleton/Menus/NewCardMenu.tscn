@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://ctei4xu74no6o"]
+
+[ext_resource type="Script" uid="uid://ky05a2wvdijt" path="res://addons/CardGameSkeleton/Menus/NewCardMenu.gd" id="1_rnt8f"]
+[ext_resource type="PackedScene" uid="uid://dqkm4gg7p68af" path="res://addons/CardGameSkeleton/Resources/AttributeField.tscn" id="2_y527x"]
+[ext_resource type="Script" uid="uid://chbsf4oc2bglf" path="res://addons/CardGameSkeleton/CardLibrary/SaveCard.gd" id="3_vbpew"]
+[ext_resource type="PackedScene" uid="uid://dscpfc825fla0" path="res://addons/CardGameSkeleton/AbstractCard2D.tscn" id="4_1ic80"]
+
+[node name="NewCardMenu" type="MarginContainer" node_paths=PackedStringArray("fields_container")]
+visible = false
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 78.0
+grow_horizontal = 2
+script = ExtResource("1_rnt8f")
+field_scene = ExtResource("2_y527x")
+fields_container = NodePath("OverallMenu/VBoxContainer")
+
+[node name="OverallMenu" type="VBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="LastMenu" type="Button" parent="OverallMenu"]
+layout_mode = 2
+text = "< Back"
+
+[node name="HSeparator" type="HSeparator" parent="OverallMenu"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OverallMenu"]
+layout_mode = 2
+
+[node name="SaveCard" type="Button" parent="OverallMenu" node_paths=PackedStringArray("fields_container")]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+text = "Save Card"
+script = ExtResource("3_vbpew")
+card_scene = ExtResource("4_1ic80")
+fields_container = NodePath("../VBoxContainer")
+
+[connection signal="pressed" from="OverallMenu/SaveCard" to="OverallMenu/SaveCard" method="on_pressed"]

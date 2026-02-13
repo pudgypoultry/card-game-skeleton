@@ -2,5 +2,5 @@
 extends Resource
 class_name CardProjectSettings
 
-# This @export creates an editable list in the Inspector!
+@export_dir var card_root_directory: String = "res://Cards/"
 @export var custom_attributes: Array[CardAttribute]

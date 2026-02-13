@@ -1,7 +1,6 @@
 @tool
 extends HBoxContainer
 
-## We use 'class_name' so we can check 'is AttributeField' in other scripts if needed
 class_name AttributeField
 
 @onready var label_node: Label = $LabelName
@@ -9,6 +8,7 @@ class_name AttributeField
 
 # The specific input control (LineEdit, SpinBox, or OptionButton)
 var input_control: Control
+
 
 ## This function builds the UI based on the resource data
 func setup(attribute_data: CardAttribute) -> void:
@@ -48,9 +48,11 @@ func setup(attribute_data: CardAttribute) -> void:
 	input_container.add_child(input_control)
 	input_control.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
+
 ## Helper function to get the name of the attribute (key)
 func get_attribute_name() -> String:
 	return label_node.text
+
 
 ## Helper function to get the actual data (value)
 func get_value():
@@ -67,3 +69,22 @@ func get_value():
 			return ""
 		return input_control.get_item_text(input_control.selected)
 	return null
+
+
+func set_value(value) -> void:
+	if not input_control:
+		return
+		
+	if input_control is LineEdit:
+		input_control.text = str(value)
+	elif input_control is SpinBox:
+		input_control.value = float(value)
+	elif input_control is OptionButton:
+		# Find the index of the string value
+		for i in range(input_control.item_count):
+			if input_control.get_item_text(i) == str(value):
+				input_control.selected = i
+				return
+		# If not found, select nothing or default
+		if input_control.item_count > 0:
+			input_control.selected = 0

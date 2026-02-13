@@ -1,0 +1,93 @@
+[gd_scene load_steps=2 format=3 uid="uid://cykr3uvnqbj7y"]
+
+[ext_resource type="Script" uid="uid://cqpgxg3u5of2d" path="res://addons/CardGameSkeleton/Menus/NewDeckMenu.gd" id="1_pjk2i"]
+
+[node name="NewDeckMenu" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_pjk2i")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "< Back"
+
+[node name="DeckNameInput" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+placeholder_text = "Enter Deck Name"
+
+[node name="SaveButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Save Deck"
+
+[node name="DeleteButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+modulate = Color(1, 0, 0.066669464, 1)
+layout_mode = 2
+text = "Delete Deck"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="DeckContent" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DeckLibrary" type="VBoxContainer" parent="VBoxContainer/DeckContent"]
+custom_minimum_size = Vector2(310, 500)
+layout_mode = 2
+
+[node name="Library" type="Label" parent="VBoxContainer/DeckContent/DeckLibrary"]
+layout_mode = 2
+text = "All Cards"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/DeckContent/DeckLibrary"]
+layout_mode = 2
+
+[node name="SearchInput" type="LineEdit" parent="VBoxContainer/DeckContent/DeckLibrary/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Search Cards..."
+
+[node name="FilterDropdown" type="OptionButton" parent="VBoxContainer/DeckContent/DeckLibrary/HBoxContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/DeckContent/DeckLibrary"]
+custom_minimum_size = Vector2(100, 500)
+layout_mode = 2
+
+[node name="DeckGrid" type="GridContainer" parent="VBoxContainer/DeckContent/DeckLibrary/ScrollContainer"]
+custom_minimum_size = Vector2(100, 500)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 5
+columns = 3
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/DeckContent"]
+layout_mode = 2
+
+[node name="CurrentDeck" type="VBoxContainer" parent="VBoxContainer/DeckContent"]
+custom_minimum_size = Vector2(150, 500)
+layout_mode = 2
+
+[node name="CountLabel" type="Label" parent="VBoxContainer/DeckContent/CurrentDeck"]
+layout_mode = 2
+text = "Cards in Deck (0)"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/DeckContent/CurrentDeck"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DeckList" type="VBoxContainer" parent="VBoxContainer/DeckContent/CurrentDeck/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3

@@ -6,6 +6,7 @@ class_name CGSDock
 @export var card_menu : MarginContainer
 @export var deck_menu : MarginContainer
 @export var configuration_menu : MarginContainer
+@export var new_deck_menu : MarginContainer
 
 @export_tool_button("Reset AddOn", "Callable") var reset_button = reset_tool
 

@@ -1,0 +1,18 @@
+{
+	"Example": [
+		"Ace of Spades",
+		"Queen of Hearts",
+		"King of Hearts"
+	],
+	"Example2": [
+		"Ace of Spades",
+		"Ace of Spades",
+		"King of Hearts",
+		"King of Hearts",
+		"King of Hearts",
+		"Queen of Hearts",
+		"Queen of Hearts",
+		"Queen of Hearts",
+		"Queen of Hearts"
+	]
+}

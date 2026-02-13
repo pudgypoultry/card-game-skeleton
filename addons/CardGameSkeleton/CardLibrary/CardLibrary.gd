@@ -8,6 +8,7 @@ class_name CardLibrary
 @export var card_loader : Node
 @export var settings_resource : CardProjectSettings
 var json_card_file_path = "res://addons/CardGameSkeleton/CardLibrary/Cards.json"
+var json_deck_file_path = "res://addons/CardGameSkeleton/CardLibrary/Decks.json"
 var card_description_dict : Dictionary = {}
 var card_name_dict : Dictionary = {}
 var card_tags_Dict : Dictionary = {}
@@ -123,6 +124,45 @@ func save_new_card_to_json(card : Card, card_elements : Dictionary):
 	save_dict_to_json(card_dict)
 
 
+## Returns the entire dictionary of decks
+func get_deck_dict() -> Dictionary:
+	if not FileAccess.file_exists(json_deck_file_path):
+		return {}
+		
+	var file = FileAccess.open(json_deck_file_path, FileAccess.READ)
+	var json_text = file.get_as_text()
+	var json = JSON.new()
+	var error = json.parse(json_text)
+	
+	if error == OK and json.data is Dictionary:
+		return json.data
+	return {}
+
+
+## Saves a specific deck list to the JSON file
+func save_deck(deck_name: String, card_list: Array) -> void:
+	var decks = get_deck_dict()
+	decks[deck_name] = card_list
+	
+	var file = FileAccess.open(json_deck_file_path, FileAccess.WRITE)
+	var json_string = JSON.stringify(decks, "\t")
+	file.store_string(json_string)
+	file.close()
+	print("Saved Deck: " + deck_name)
+
+
+## Deletes a deck from the JSON file
+func delete_deck(deck_name: String) -> void:
+	var decks = get_deck_dict()
+	if decks.has(deck_name):
+		decks.erase(deck_name)
+		
+		var file = FileAccess.open(json_deck_file_path, FileAccess.WRITE)
+		var json_string = JSON.stringify(decks, "\t")
+		file.store_string(json_string)
+		file.close()
+
+
 func get_json_dict():
 	var json_file : FileAccess = FileAccess.open(json_card_file_path, FileAccess.READ)
 	# print(json_card_file_path)
@@ -147,9 +187,55 @@ func save_dict_to_json(dict):
 	json_file.close()
 
 
-func save_card_scene_to_file(card : Card):
+func save_card_scene_to_file(card: Card) -> void:
+	# Get root directory
+	var root_path = "res://Cards/" # Default fallback
+	if settings_resource and settings_resource.card_root_directory != "":
+		root_path = settings_resource.card_root_directory
+	
+	# Construct the specific directory for card
+	var card_specific_dir = root_path + card.card_name + "/"
+	
+	# Create directory if it doesn't exist
+	var dir = DirAccess.open(root_path)
+	if not dir:
+		# If root doesn't exist, create it recursively
+		DirAccess.make_dir_recursive_absolute(card_specific_dir)
+	else:
+		if not dir.dir_exists(card.card_name):
+			dir.make_dir(card.card_name)
+			print("Created new directory: " + card_specific_dir)
+		else:
+			print("Directory exists, updating file in: " + card_specific_dir)
+	
+	# Save the scene inside directory
+	var save_path = card_specific_dir + card.card_name + ".tscn"
+	
 	var packed_scene = PackedScene.new()
-	packed_scene.pack(card)
-	ResourceSaver.save(
-		packed_scene, 
-		card_folder_file_path + card.card_name + ".tscn")
+	var result = packed_scene.pack(card)
+	if result == OK:
+		var save_err = ResourceSaver.save(packed_scene, save_path)
+		if save_err == OK:
+			print("Successfully saved card scene to: " + save_path)
+		else:
+			print("Error saving card scene: ", save_err)
+	else:
+		print("Error packing card scene: ", result)
+
+
+func delete_card(card_name: String) -> void:
+	# Remove from JSON Data
+	var data = get_json_dict()
+	if data.has(card_name):
+		data.erase(card_name)
+		save_dict_to_json(data)
+	
+	# Remove the .tscn file
+	var file_path = card_folder_file_path + card_name + ".tscn"
+	var dir = DirAccess.open(card_folder_file_path)
+	if dir:
+		if dir.file_exists(card_name + ".tscn"):
+			dir.remove(card_name + ".tscn")
+			print("Deleted file: " + file_path)
+		else:
+			print("File not found for deletion: " + file_path)

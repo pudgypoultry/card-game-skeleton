@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://byand5xhsw5e6"]
+
+[ext_resource type="Script" uid="uid://b13enk8cvhrj1" path="res://addons/CardGameSkeleton/Menus/EditCardMenu.gd" id="1_0xsnf"]
+[ext_resource type="PackedScene" uid="uid://dqkm4gg7p68af" path="res://addons/CardGameSkeleton/Resources/AttributeField.tscn" id="2_wjoui"]
+[ext_resource type="PackedScene" uid="uid://dscpfc825fla0" path="res://addons/CardGameSkeleton/AbstractCard2D.tscn" id="4_ur6yf"]
+
+[node name="EditCardMenu" type="MarginContainer" node_paths=PackedStringArray("fields_container")]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 121.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_0xsnf")
+field_scene = ExtResource("2_wjoui")
+fields_container = NodePath("EditCardMenuVBox/VBoxContainer")
+card_scene = ExtResource("4_ur6yf")
+
+[node name="EditCardMenuVBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="CardArtPreview" type="TextureRect" parent="EditCardMenuVBox"]
+custom_minimum_size = Vector2(150, 200)
+layout_mode = 2
+stretch_mode = 5
+
+[node name="LastMenu" type="Button" parent="EditCardMenuVBox"]
+layout_mode = 2
+text = "< Back"
+
+[node name="HSeparator" type="HSeparator" parent="EditCardMenuVBox"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EditCardMenuVBox"]
+layout_mode = 2
+
+[node name="UpdateCard" type="Button" parent="EditCardMenuVBox"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+text = "Update Card Information"
+
+[node name="HSeparator2" type="HSeparator" parent="EditCardMenuVBox"]
+layout_mode = 2
+
+[node name="DeleteCard" type="Button" parent="EditCardMenuVBox"]
+modulate = Color(1, 0, 0.11469555, 1)
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+text = "Delete Card"
