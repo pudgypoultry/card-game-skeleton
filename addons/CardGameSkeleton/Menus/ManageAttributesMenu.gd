@@ -68,19 +68,55 @@ func _on_save_pressed() -> void:
 
 
 func _refresh_list() -> void:
-	if not card_library or not card_library.settings_resource:
-		return
-
-	# Clear current list
+	# 1. Clear existing items
 	for child in attribute_list_container.get_children():
 		child.queue_free()
 		
-	# Rebuild list
+	if not card_library or not card_library.settings_resource:
+		return
+		
+	# 2. Loop through attributes
 	var attributes = card_library.settings_resource.custom_attributes
 	for i in range(attributes.size()):
 		var attr = attributes[i]
-		if attr is CardAttribute:
-			_create_list_row(attr, i)
+		
+		# Create a row
+		var row = HBoxContainer.new()
+		
+		# A. NAME LABEL (Expands to push everything else to the right)
+		var name_label = Label.new()
+		name_label.text = attr.attribute_name
+		name_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		row.add_child(name_label)
+		
+		# B. TYPE LABEL (Fixed size, sits on the right)
+		var type_label = Label.new()
+		var type_name = CardAttribute.AttributeType.keys()[attr.type]
+		type_label.text = type_name.capitalize() # e.g., "TEXT" -> "Text"
+		type_label.modulate = Color(0.7, 0.7, 0.7) # Grey text to distinguish it
+		row.add_child(type_label)
+		
+		# C. SEPARATOR (Optional tiny space)
+		var spacer = Control.new()
+		spacer.custom_minimum_size = Vector2(10, 0)
+		row.add_child(spacer)
+		
+		# D. DELETE BUTTON
+		var delete_btn = Button.new()
+		delete_btn.text = "Delete"
+		
+		# --- SAFETY CHECK ---
+		if attr.attribute_name == "Card Name" or attr.attribute_name == "Scene Location":
+			delete_btn.disabled = true
+			delete_btn.modulate.a = 0.5 
+			delete_btn.tooltip_text = "This is a core attribute and cannot be deleted."
+		else:
+			delete_btn.pressed.connect(_on_delete_pressed.bind(i))
+			delete_btn.modulate = Color(1, 0.4, 0.4) 
+			
+		row.add_child(delete_btn)
+		
+		attribute_list_container.add_child(row)
 
 
 func _create_list_row(attr: CardAttribute, index: int) -> void:

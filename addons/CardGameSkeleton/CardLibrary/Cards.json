@@ -1,16 +1,8 @@
 {
-	"Ace of Spades": {
-		"Back Face": "res://NewCards/BackFace.png",
-		"Card Name": "Ace of Spades",
-		"Front Face": "res://NewCards/AceOfSpades.png",
-		"Rank": 1.0,
-		"Scene Location": "res://NewCards/",
-		"Suit": "Spades"
-	},
 	"King of Hearts": {
-		"Back Face": "res://NewCards/BackFace.png",
+		"Back Face": "res://addons/CardGameSkeleton/Images/BackFace.png",
 		"Card Name": "King of Hearts",
-		"Front Face": "res://NewCards/KingOfHearts.png",
+		"Front Face": "res://addons/CardGameSkeleton/Images/KingOfHearts.png",
 		"Rank": 13.0,
 		"Scene Location": "res://NewCards/",
 		"Suit": "Hearts"

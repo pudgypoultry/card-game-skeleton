@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://do2jstkaf3d4s"
-path="res://.godot/imported/KingOfHearts.png-e85d24a5f28b6d19b686549b95df73c5.ctex"
+uid="uid://fg6avvjkichf"
+path="res://.godot/imported/King Of Hearts.png-9b937709c3a66aced29f160ee6ad8f0e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/CardGameSkeleton/Images/KingOfHearts.png"
-dest_files=["res://.godot/imported/KingOfHearts.png-e85d24a5f28b6d19b686549b95df73c5.ctex"]
+source_file="res://Cards/King Of Hearts/King Of Hearts.png"
+dest_files=["res://.godot/imported/King Of Hearts.png-9b937709c3a66aced29f160ee6ad8f0e.ctex"]
 
 [params]
 

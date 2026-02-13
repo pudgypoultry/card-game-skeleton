@@ -28,6 +28,7 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="OverallMenu"]
 layout_mode = 2
+alignment = 1
 
 [node name="SaveCard" type="Button" parent="OverallMenu" node_paths=PackedStringArray("fields_container")]
 custom_minimum_size = Vector2(128, 0)

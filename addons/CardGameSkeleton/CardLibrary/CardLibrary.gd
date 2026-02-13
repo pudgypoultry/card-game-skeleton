@@ -117,10 +117,10 @@ func create_card_json_entry(card : Card, card_elements : Dictionary):
 
 func save_new_card_to_json(card : Card, card_elements : Dictionary):
 	var card_dict = get_json_dict()
-	print("ORIGINAL STATE:	", str(card_dict))
+	# print("ORIGINAL STATE:	", str(card_dict))
 	card_dict[card.card_name] = card_elements
-	print("	Adding " + card.card_name + " to dictionary")
-	print("ALTERED STATE:	", str(card_dict))
+	print("	Adding " + card.card_name + " to JSON dictionary")
+	# print("ALTERED STATE:	", str(card_dict))
 	save_dict_to_json(card_dict)
 
 
@@ -165,7 +165,6 @@ func delete_deck(deck_name: String) -> void:
 
 func get_json_dict():
 	var json_file : FileAccess = FileAccess.open(json_card_file_path, FileAccess.READ)
-	# print(json_card_file_path)
 	var json_text = json_file.get_as_text().strip_edges(true, true)
 	var json = JSON.new()
 	var parse_result = json.parse(json_text)
@@ -181,46 +180,55 @@ func get_json_dict():
 func save_dict_to_json(dict):
 	var json_file : FileAccess = FileAccess.open(json_card_file_path, FileAccess.WRITE)
 	var json_string = JSON.stringify(dict, "\t")
-	#print(json_string)
 	json_file.store_line(json_string)
-	print("JOBS DONE ZUG ZUG")
+	# print("JOBS DONE ZUG ZUG")
 	json_file.close()
 
 
 func save_card_scene_to_file(card: Card) -> void:
-	# Get root directory
-	var root_path = "res://Cards/" # Default fallback
-	if settings_resource and settings_resource.card_root_directory != "":
-		root_path = settings_resource.card_root_directory
+	var root_path = "res://Cards/"
+	var storage_style = CardProjectSettings.StorageStyle.SUBFOLDER
 	
-	# Construct the specific directory for card
-	var card_specific_dir = root_path + card.card_name + "/"
+	if settings_resource:
+		if settings_resource.card_root_directory != "":
+			root_path = settings_resource.card_root_directory
+		storage_style = settings_resource.storage_style
 	
-	# Create directory if it doesn't exist
-	var dir = DirAccess.open(root_path)
-	if not dir:
-		# If root doesn't exist, create it recursively
-		DirAccess.make_dir_recursive_absolute(card_specific_dir)
+	var target_dir = root_path
+	
+	if card.attributes.has("Scene Location") and str(card.attributes["Scene Location"]) != "":
+		target_dir = str(card.attributes["Scene Location"])
+		if not target_dir.ends_with("/"):
+			target_dir += "/"
 	else:
-		if not dir.dir_exists(card.card_name):
-			dir.make_dir(card.card_name)
-			print("Created new directory: " + card_specific_dir)
+		if storage_style == CardProjectSettings.StorageStyle.SUBFOLDER:
+			target_dir = root_path + card.card_name + "/"
 		else:
-			print("Directory exists, updating file in: " + card_specific_dir)
+			target_dir = root_path
 	
-	# Save the scene inside directory
-	var save_path = card_specific_dir + card.card_name + ".tscn"
+	# Create directory
+	var dir = DirAccess.open("res://")
+	if not dir.dir_exists(target_dir):
+		var err = dir.make_dir_recursive_absolute(target_dir)
+		if err == OK:
+			print("Created directory: " + target_dir)
+		else:
+			print("Error creating directory: " + target_dir)
+			return
+			
+	# Save the file
+	var save_path = target_dir + card.card_name + ".tscn"
 	
 	var packed_scene = PackedScene.new()
 	var result = packed_scene.pack(card)
 	if result == OK:
 		var save_err = ResourceSaver.save(packed_scene, save_path)
 		if save_err == OK:
-			print("Successfully saved card scene to: " + save_path)
+			print("Saved card to: " + save_path)
 		else:
-			print("Error saving card scene: ", save_err)
+			print("Error saving resource: ", save_err)
 	else:
-		print("Error packing card scene: ", result)
+		print("Error packing scene: ", result)
 
 
 func delete_card(card_name: String) -> void:

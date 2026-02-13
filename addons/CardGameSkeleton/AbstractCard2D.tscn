@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://1oiu3jpvjn26" path="res://addons/CardGameSkeleton/CardLibrary/Card.gd" id="1_4j07t"]
 [ext_resource type="Texture2D" uid="uid://bb0bt66di7f58" path="res://addons/CardGameSkeleton/Images/CardBack.jpg" id="2_11yff"]
-[ext_resource type="Texture2D" uid="uid://fg6avvjkichf" path="res://addons/CardGameSkeleton/Images/KingOfHearts.png" id="2_d41j5"]
+[ext_resource type="Texture2D" uid="uid://fg6avvjkichf" path="res://Cards/King Of Hearts/King Of Hearts.png" id="2_d41j5"]
 
 [node name="AbstractCard" type="Node2D" node_paths=PackedStringArray("cardFront", "cardBack")]
 script = ExtResource("1_4j07t")

@@ -70,11 +70,11 @@ func _on_filter_selected(index: int) -> void:
 	
 	refresh_library()
 
-## --- MAIN LOGIC ---
 
 func refresh_library() -> void:
 	if not card_library: return
 	
+	# Clear existing buttons
 	for child in library_grid.get_children():
 		child.queue_free()
 		
@@ -82,36 +82,58 @@ func refresh_library() -> void:
 	var card_names = data.keys()
 	card_names.sort()
 	
-	var search_term = search_input.text.to_lower().strip_edges()
+	# 1. Setup Search & Path
+	var search_term = ""
+	if search_input:
+		search_term = search_input.text.to_lower().strip_edges()
+		
+	var root_path = "res://Cards/"
+	if card_library.settings_resource and card_library.settings_resource.card_root_directory != "":
+		root_path = card_library.settings_resource.card_root_directory
 	
 	for card_name in card_names:
 		var info = data[card_name]
 		
-		
-		# Match Name
 		if search_term != "" and not card_name.to_lower().contains(search_term):
-			continue # Skip if name doesn't match
+			continue 
 			
-		# Attribute Filter
 		if active_filter_key != "":
-			# If the card doesn't have this attribute, or the value doesn't match
 			if not info.has(active_filter_key) or str(info[active_filter_key]) != active_filter_value:
-				continue # Skip if attribute doesn't match
-				
+				continue
 		
 		var btn = Button.new()
 		btn.text = card_name
 		btn.custom_minimum_size = Vector2(100, 120)
+		btn.autowrap_mode = TextServer.AUTOWRAP_WORD
 		btn.clip_text = true
 		btn.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		btn.custom_minimum_size = Vector2(100,200)
 		btn.vertical_icon_alignment = VERTICAL_ALIGNMENT_TOP
 		btn.expand_icon = true
 		
-		if info.get("Card Face") and ResourceLoader.exists(info["Card Face"]):
-			btn.icon = load(info["Card Face"])
-		else:
-			btn.icon = preload("res://icon.svg")
-			
+		var final_icon = preload("res://icon.svg")
+		var found_image = false
+		
+		var extensions = ["png", "jpg", "jpeg", "svg", "webp"]
+		for ext in extensions:
+			var test_path = root_path + card_name + "/" + card_name + "." + ext
+			if ResourceLoader.exists(test_path):
+				final_icon = load(test_path)
+				found_image = true
+				break
+		
+		if not found_image:
+			var art_path = ""
+			if info.has("Card Face"):
+				art_path = info["Card Face"]
+			elif info.has("Card Face Path"):
+				art_path = info["Card Face Path"]
+				
+			if art_path != "" and ResourceLoader.exists(art_path):
+				final_icon = load(art_path)
+		
+		btn.icon = final_icon
+		
 		btn.pressed.connect(_add_card_to_deck.bind(card_name))
 		library_grid.add_child(btn)
 
@@ -124,10 +146,7 @@ func _add_card_to_deck(card_name: String) -> void:
 func _refresh_deck_list() -> void:
 	for child in deck_list.get_children():
 		child.queue_free()
-		
-	# Show cards in the deck list
-	# We sort them visually, but keep the underlying array order if specific order matters?
-	# For a deck manager, usually you want to see them grouped.
+	
 	var display_list = current_deck_cards.duplicate()
 	display_list.sort()
 	
@@ -138,6 +157,7 @@ func _refresh_deck_list() -> void:
 		var lbl = Label.new()
 		lbl.text = card_name
 		lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		lbl.autowrap_mode = TextServer.AUTOWRAP_WORD
 		row.add_child(lbl)
 		
 		var del_btn = Button.new()

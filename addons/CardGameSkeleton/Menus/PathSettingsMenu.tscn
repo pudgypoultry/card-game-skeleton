@@ -43,3 +43,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Save"
+
+[node name="SubfolderCheckbox" type="CheckButton" parent="VBoxContainer"]
+layout_mode = 2
+text = "Create subfolder for each card using the card name?"

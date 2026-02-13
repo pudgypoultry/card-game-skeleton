@@ -5,14 +5,25 @@
 		"King of Hearts"
 	],
 	"Example2": [
+		"Queen of Hearts",
+		"Queen of Hearts",
+		"Queen of Hearts",
+		"Queen of Hearts",
+		"Queen of Hearts",
+		"Test",
+		"King Of Hearts"
+	],
+	"Example3": [
+		"Ace of Spades",
+		"King of Hearts",
+		"Queen of Hearts",
+		"Test",
+		"Test",
+		"Test",
+		"Test",
 		"Ace of Spades",
 		"Ace of Spades",
 		"King of Hearts",
-		"King of Hearts",
-		"King of Hearts",
-		"Queen of Hearts",
-		"Queen of Hearts",
-		"Queen of Hearts",
-		"Queen of Hearts"
+		"Ace of Spades"
 	]
 }

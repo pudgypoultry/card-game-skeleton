@@ -39,6 +39,7 @@ func populate_grid() -> void:
 		btn.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		btn.vertical_icon_alignment = VERTICAL_ALIGNMENT_TOP
 		btn.expand_icon = true
+		btn.autowrap_mode = TextServer.AUTOWRAP_WORD
 		
 		# Connect click to load functionality
 		btn.pressed.connect(_on_deck_clicked.bind(deck_name))

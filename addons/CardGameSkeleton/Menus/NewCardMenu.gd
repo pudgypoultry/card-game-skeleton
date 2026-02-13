@@ -13,32 +13,31 @@ func _ready() -> void:
 
 # Generates the input forms based on the ProjectAttributes resource
 func populate_fields() -> void:
-	# Safety checks to prevent crashes if nodes aren't assigned
-	if not field_scene:
-		print("NewCardMenu Error: Field Scene is not assigned.")
-		return
-	if not fields_container:
-		print("NewCardMenu Error: Fields Container is not assigned.")
-		return
-	if not card_library:
-		print("NewCardMenu Error: Card Library is not assigned.")
+	if not field_scene or not fields_container or not card_library:
 		return
 
-	# Clear existing fields to prevent duplicates
+	# Clear existing fields
 	for child in fields_container.get_children():
 		child.queue_free()
 
-	# Get the list of CardAttribute resources from the library
+	# Get attributes
 	var attributes = card_library.get_custom_attributes()
-
-	# Create a field for each attribute
+	var root_path = "res://Cards/"
+	var style = CardProjectSettings.StorageStyle.SUBFOLDER
+	
+	# Fetch settings
+	if card_library.settings_resource:
+		if card_library.settings_resource.card_root_directory != "":
+			root_path = card_library.settings_resource.card_root_directory
+		style = card_library.settings_resource.storage_style
+	
+	# Create fields
 	for attribute_data in attributes:
 		if attribute_data is CardAttribute:
 			var new_field = field_scene.instantiate()
 			fields_container.add_child(new_field)
+			new_field.setup(attribute_data)
 			
-			# Configure the field
-			if new_field.has_method("setup"):
-				new_field.setup(attribute_data)
-			else:
-				print("Error: The field scene does not have a 'setup' method.")
+			if attribute_data.attribute_name == "Scene Location":
+				var default_path = root_path
+				new_field.set_value(default_path)
