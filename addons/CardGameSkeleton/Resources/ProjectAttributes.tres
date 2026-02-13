@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CardProjectSettings" load_steps=9 format=3 uid="uid://djc5t44vso6ar"]
+[gd_resource type="Resource" script_class="CardProjectSettings" load_steps=8 format=3 uid="uid://djc5t44vso6ar"]
 
 [ext_resource type="Script" uid="uid://u7rekoppl5mn" path="res://addons/CardGameSkeleton/Resources/CardAttribute.gd" id="1_uk7gn"]
 [ext_resource type="Script" uid="uid://c6ghph748ex5o" path="res://addons/CardGameSkeleton/Resources/CardProjectSettings.gd" id="2_o5oo0"]
@@ -6,6 +6,14 @@
 [sub_resource type="Resource" id="Resource_uk7gn"]
 script = ExtResource("1_uk7gn")
 attribute_name = "Card Name"
+
+[sub_resource type="Resource" id="Resource_cxecs"]
+script = ExtResource("1_uk7gn")
+attribute_name = "Scene Location"
+
+[sub_resource type="Resource" id="Resource_qslpy"]
+script = ExtResource("1_uk7gn")
+attribute_name = "Front Face Location"
 
 [sub_resource type="Resource" id="Resource_o5oo0"]
 script = ExtResource("1_uk7gn")
@@ -16,21 +24,9 @@ type = 1
 script = ExtResource("1_uk7gn")
 attribute_name = "Suit"
 type = 2
-selection_options = Array[String](["Diamonds", "Spades", "Hearts", "Clubs"])
-
-[sub_resource type="Resource" id="Resource_qslpy"]
-script = ExtResource("1_uk7gn")
-attribute_name = "Front Face"
-
-[sub_resource type="Resource" id="Resource_gv78t"]
-script = ExtResource("1_uk7gn")
-attribute_name = "Back Face"
-
-[sub_resource type="Resource" id="Resource_cxecs"]
-script = ExtResource("1_uk7gn")
-attribute_name = "Scene Location"
+selection_options = Array[String](["Clubs", "Diamonds", "Hearts", "Spades"])
 
 [resource]
 script = ExtResource("2_o5oo0")
-custom_attributes = Array[ExtResource("1_uk7gn")]([SubResource("Resource_uk7gn"), SubResource("Resource_o5oo0"), SubResource("Resource_d4nsh"), SubResource("Resource_qslpy"), SubResource("Resource_gv78t"), SubResource("Resource_cxecs")])
+custom_attributes = Array[ExtResource("1_uk7gn")]([SubResource("Resource_uk7gn"), SubResource("Resource_cxecs"), SubResource("Resource_qslpy"), SubResource("Resource_o5oo0"), SubResource("Resource_d4nsh")])
 metadata/_custom_type_script = "uid://c6ghph748ex5o"

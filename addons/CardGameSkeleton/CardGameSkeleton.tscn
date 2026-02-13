@@ -1,28 +1,33 @@
-[gd_scene load_steps=18 format=3 uid="uid://cm6pb4a0kyv4m"]
+[gd_scene load_steps=22 format=3 uid="uid://cm6pb4a0kyv4m"]
 
-[ext_resource type="Script" uid="uid://6j8xgw5owe8i" path="res://addons/CardGameSkeleton/AddonScripts/DockControl.gd" id="1_1fqu4"]
+[ext_resource type="Script" uid="uid://6j8xgw5owe8i" path="res://addons/CardGameSkeleton/Menus/DockControl.gd" id="1_1fqu4"]
 [ext_resource type="Script" uid="uid://ce4j7sxhv1alt" path="res://addons/CardGameSkeleton/CardLibrary/CardLibrary.gd" id="2_hqacc"]
 [ext_resource type="Resource" uid="uid://djc5t44vso6ar" path="res://addons/CardGameSkeleton/Resources/ProjectAttributes.tres" id="3_bp3mr"]
 [ext_resource type="Script" uid="uid://b1ipskycyw4oe" path="res://addons/CardGameSkeleton/CardLibrary/LoadCard.gd" id="4_4kup4"]
 [ext_resource type="Script" uid="uid://bkw0o6k7glh83" path="res://addons/CardGameSkeleton/CardLibrary/DeckLoader.gd" id="5_hqacc"]
-[ext_resource type="Texture2D" uid="uid://cax1mfkf7phhf" path="res://addons/CardGameSkeleton/Images/Cards.png" id="5_kij7y"]
+[ext_resource type="Texture2D" uid="uid://cax1mfkf7phhf" path="res://addons/CardGameSkeleton/Images/Menus/Cards.png" id="5_kij7y"]
 [ext_resource type="Script" uid="uid://benn2aran64n6" path="res://addons/CardGameSkeleton/Menus/CGSMenuButton.gd" id="6_i8c3e"]
-[ext_resource type="Texture2D" uid="uid://v4p0bmiacq07" path="res://addons/CardGameSkeleton/Images/Decks.png" id="7_2ew2f"]
-[ext_resource type="Texture2D" uid="uid://l8xt0vsxemah" path="res://addons/CardGameSkeleton/Images/Configuration.png" id="8_hx06g"]
+[ext_resource type="Texture2D" uid="uid://v4p0bmiacq07" path="res://addons/CardGameSkeleton/Images/Menus/Decks.png" id="7_2ew2f"]
+[ext_resource type="Texture2D" uid="uid://l8xt0vsxemah" path="res://addons/CardGameSkeleton/Images/Menus/Configuration.png" id="8_hx06g"]
 [ext_resource type="Script" uid="uid://cb0o3fha5uvaa" path="res://addons/CardGameSkeleton/Menus/CardMenu.gd" id="9_ilkbd"]
 [ext_resource type="PackedScene" uid="uid://byand5xhsw5e6" path="res://addons/CardGameSkeleton/Menus/EditCardMenu.tscn" id="10_wbye6"]
+[ext_resource type="Texture2D" uid="uid://ebbm7oigyxut" path="res://addons/CardGameSkeleton/Images/Menus/BackSquare.png" id="11_2ew2f"]
 [ext_resource type="Script" uid="uid://di0iq8ed0c6rb" path="res://addons/CardGameSkeleton/Menus/DeckMenu.gd" id="11_wt2xn"]
-[ext_resource type="Texture2D" uid="uid://ueeherr70c32" path="res://addons/CardGameSkeleton/Images/AddNewCard.png" id="12_wouvy"]
+[ext_resource type="Texture2D" uid="uid://ueeherr70c32" path="res://addons/CardGameSkeleton/Images/Menus/AddNewCard.png" id="12_wouvy"]
 [ext_resource type="PackedScene" uid="uid://ctei4xu74no6o" path="res://addons/CardGameSkeleton/Menus/NewCardMenu.tscn" id="13_fgq2x"]
+[ext_resource type="Texture2D" uid="uid://c80vmp0mk8w33" path="res://addons/CardGameSkeleton/Images/Menus/BackSmall.png" id="13_i8c3e"]
 [ext_resource type="PackedScene" uid="uid://cykr3uvnqbj7y" path="res://addons/CardGameSkeleton/Menus/NewDeckMenu.tscn" id="14_cjp2d"]
+[ext_resource type="Texture2D" uid="uid://by65ke4gwht5g" path="res://addons/CardGameSkeleton/Images/Menus/ManageAttributes.png" id="14_kij7y"]
+[ext_resource type="Texture2D" uid="uid://usgvndmjvt53" path="res://addons/CardGameSkeleton/Images/Menus/ProjectSettings.png" id="15_i8c3e"]
 [ext_resource type="PackedScene" uid="uid://bp3ogheafjf1u" path="res://addons/CardGameSkeleton/Menus/ManageAttributesMenu.tscn" id="15_va4xo"]
 [ext_resource type="PackedScene" uid="uid://covcvkru51l5k" path="res://addons/CardGameSkeleton/Menus/PathSettingsMenu.tscn" id="17_bp3mr"]
 
-[node name="CardGameSkeleton" type="Control" node_paths=PackedStringArray("main_menu", "card_menu", "deck_menu", "configuration_menu", "new_deck_menu")]
-layout_mode = 3
-anchors_preset = 10
+[node name="CardGameSkeleton" type="ScrollContainer" node_paths=PackedStringArray("main_menu", "card_menu", "deck_menu", "configuration_menu", "new_deck_menu")]
+anchors_preset = 15
 anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 script = ExtResource("1_1fqu4")
 main_menu = NodePath("MainMenu")
@@ -43,31 +48,28 @@ script = ExtResource("4_4kup4")
 script = ExtResource("5_hqacc")
 
 [node name="MainMenu" type="MarginContainer" parent="."]
-layout_mode = 1
-offset_right = 260.0
-offset_bottom = 260.0
+layout_mode = 2
+size_flags_horizontal = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenu"]
 layout_mode = 2
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/VBoxContainer"]
+[node name="Cards" type="TextureButton" parent="MainMenu/VBoxContainer" node_paths=PackedStringArray("menu_to_show")]
 layout_mode = 2
-alignment = 1
-
-[node name="Cards" type="TextureButton" parent="MainMenu/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("menu_to_show")]
-layout_mode = 2
+size_flags_horizontal = 4
 texture_normal = ExtResource("5_kij7y")
 script = ExtResource("6_i8c3e")
 message = "Cards"
-menu_to_show = NodePath("../../../../CardMenu")
+menu_to_show = NodePath("../../../CardMenu")
 
-[node name="Decks" type="TextureButton" parent="MainMenu/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("menu_to_show")]
+[node name="Decks" type="TextureButton" parent="MainMenu/VBoxContainer" node_paths=PackedStringArray("menu_to_show")]
 layout_mode = 2
+size_flags_horizontal = 4
 texture_normal = ExtResource("7_2ew2f")
 script = ExtResource("6_i8c3e")
 message = "Decks"
-menu_to_show = NodePath("../../../../DeckMenu")
+menu_to_show = NodePath("../../../DeckMenu")
 
 [node name="Configuration" type="TextureButton" parent="MainMenu/VBoxContainer" node_paths=PackedStringArray("menu_to_show")]
 layout_mode = 2
@@ -79,38 +81,50 @@ menu_to_show = NodePath("../../../ConfigurationMenu")
 
 [node name="CardMenu" type="MarginContainer" parent="." node_paths=PackedStringArray("card_library", "grid_container", "edit_menu", "dock_control")]
 visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
+size_flags_horizontal = 0
 script = ExtResource("9_ilkbd")
 card_library = NodePath("../CardJSONManager")
-grid_container = NodePath("GridContainer")
+grid_container = NodePath("VBoxContainer/GridContainer")
 edit_menu = NodePath("../EditCardMenu")
 dock_control = NodePath("..")
 
-[node name="GridContainer" type="GridContainer" parent="CardMenu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CardMenu"]
 layout_mode = 2
-columns = 3
 
-[node name="BackToMainMenu" type="Button" parent="CardMenu/GridContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CardMenu/VBoxContainer"]
 layout_mode = 2
-text = "< Back"
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="BackToMainMenu" type="TextureButton" parent="CardMenu/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("11_2ew2f")
+
+[node name="NewCard" type="TextureButton" parent="CardMenu/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("menu_to_show")]
+layout_mode = 2
+texture_normal = ExtResource("12_wouvy")
+script = ExtResource("6_i8c3e")
+message = "New Card"
+menu_to_show = NodePath("../../../../NewCardMenu")
+
+[node name="GridContainer" type="GridContainer" parent="CardMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 3
 
 [node name="EditCardMenu" parent="." node_paths=PackedStringArray("card_library") instance=ExtResource("10_wbye6")]
 visible = false
-layout_mode = 1
+layout_mode = 2
+size_flags_horizontal = 0
 card_library = NodePath("../CardJSONManager")
 
 [node name="DeckMenu" type="MarginContainer" parent="." node_paths=PackedStringArray("card_library", "grid_container", "deck_builder", "dock_control")]
 visible = false
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 31.0
-grow_horizontal = 2
+layout_mode = 2
+size_flags_horizontal = 0
 script = ExtResource("11_wt2xn")
 card_library = NodePath("../CardJSONManager")
 grid_container = NodePath("GridContainer")
@@ -119,11 +133,14 @@ dock_control = NodePath("..")
 
 [node name="GridContainer" type="GridContainer" parent="DeckMenu"]
 layout_mode = 2
+size_flags_horizontal = 4
 columns = 3
 
-[node name="BackToMainMenu" type="Button" parent="DeckMenu/GridContainer"]
+[node name="BackToMainMenu" type="TextureButton" parent="DeckMenu/GridContainer"]
 layout_mode = 2
-text = "< Back"
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("11_2ew2f")
 
 [node name="NewDeck" type="Button" parent="DeckMenu/GridContainer"]
 layout_mode = 2
@@ -131,50 +148,38 @@ text = "Add New Deck"
 
 [node name="ConfigurationMenu" type="MarginContainer" parent="."]
 visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="GridContainer" type="GridContainer" parent="ConfigurationMenu"]
 layout_mode = 2
-columns = 3
+size_flags_horizontal = 0
 
-[node name="BackToMainMenu" type="Button" parent="ConfigurationMenu/GridContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ConfigurationMenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="BackToMainMenu" type="TextureButton" parent="ConfigurationMenu/VBoxContainer"]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
-text = "< Back"
+texture_normal = ExtResource("13_i8c3e")
 
-[node name="NewCard" type="TextureButton" parent="ConfigurationMenu/GridContainer" node_paths=PackedStringArray("menu_to_show")]
-layout_mode = 2
-texture_normal = ExtResource("12_wouvy")
-script = ExtResource("6_i8c3e")
-message = "New Card"
-menu_to_show = NodePath("../../../NewCardMenu")
-
-[node name="ManageAttributes" type="Button" parent="ConfigurationMenu/GridContainer" node_paths=PackedStringArray("menu_to_show")]
+[node name="ManageAttributes" type="TextureButton" parent="ConfigurationMenu/VBoxContainer" node_paths=PackedStringArray("menu_to_show")]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
-text = "Manage
-Attributes"
-autowrap_mode = 2
+texture_normal = ExtResource("14_kij7y")
 script = ExtResource("6_i8c3e")
 message = "Manage Attributes"
 menu_to_show = NodePath("../../../ManageAttributesMenu")
 
-[node name="ProjectSettings" type="Button" parent="ConfigurationMenu/GridContainer" node_paths=PackedStringArray("menu_to_show")]
+[node name="ProjectSettings" type="TextureButton" parent="ConfigurationMenu/VBoxContainer" node_paths=PackedStringArray("menu_to_show")]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
-text = "Project Settings"
+texture_normal = ExtResource("15_i8c3e")
 script = ExtResource("6_i8c3e")
 message = "Project Settings"
 menu_to_show = NodePath("../../../PathSettingsMenu")
 
 [node name="NewCardMenu" parent="." node_paths=PackedStringArray("card_library") instance=ExtResource("13_fgq2x")]
-layout_mode = 1
-offset_bottom = 236.0
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 card_library = NodePath("../CardJSONManager")
 
 [node name="SaveCard" parent="NewCardMenu/OverallMenu" index="3" node_paths=PackedStringArray("card_json_manager")]
@@ -182,55 +187,52 @@ card_json_manager = NodePath("../../../CardJSONManager")
 
 [node name="NewDeckMenu" parent="." node_paths=PackedStringArray("card_library", "dock_control") instance=ExtResource("14_cjp2d")]
 visible = false
-layout_mode = 1
-anchors_preset = 10
-anchor_bottom = 0.0
-offset_bottom = 543.0
-grow_vertical = 1
+layout_mode = 2
+size_flags_horizontal = 0
 card_library = NodePath("../CardJSONManager")
 dock_control = NodePath("..")
 
 [node name="DeleteButton" parent="NewDeckMenu/VBoxContainer/HBoxContainer" index="3"]
 visible = false
 
+[node name="FilterDropdown" parent="NewDeckMenu/VBoxContainer/DeckContent/DeckLibrary/HBoxContainer" index="1"]
+item_count = 5
+popup/item_1/text = "Suit: Diamonds"
+popup/item_1/id = 1
+popup/item_2/text = "Suit: Spades"
+popup/item_2/id = 2
+popup/item_3/text = "Suit: Hearts"
+popup/item_3/id = 3
+popup/item_4/text = "Suit: Clubs"
+popup/item_4/id = 4
+
 [node name="ManageAttributesMenu" parent="." node_paths=PackedStringArray("card_library") instance=ExtResource("15_va4xo")]
 visible = false
-layout_mode = 1
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 2
+size_flags_horizontal = 0
 card_library = NodePath("../CardJSONManager")
-
-[node name="VBoxContainer" parent="ManageAttributesMenu" index="0"]
-custom_minimum_size = Vector2(384, 0)
-alignment = 1
-
-[node name="TypeInput" parent="ManageAttributesMenu/VBoxContainer/HBoxContainer2" index="1"]
-selected = 0
-item_count = 3
-popup/item_0/text = "Text"
-popup/item_0/id = 0
-popup/item_1/text = "Number"
-popup/item_1/id = 1
-popup/item_2/text = "Selection"
-popup/item_2/id = 2
 
 [node name="PathSettingsMenu" parent="." node_paths=PackedStringArray("card_library", "dock_control") instance=ExtResource("17_bp3mr")]
 visible = false
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
+layout_mode = 2
+size_flags_horizontal = 0
 card_library = NodePath("../CardJSONManager")
 dock_control = NodePath("..")
 
-[connection signal="pressed" from="CardMenu/GridContainer/BackToMainMenu" to="." method="show_main_menu"]
+[node name="PathInput" parent="PathSettingsMenu/VBoxContainer/HBoxContainer2" index="0"]
+text = "res://Cards/"
+
+[node name="SubfolderCheckbox" parent="PathSettingsMenu/VBoxContainer" index="4"]
+button_pressed = true
+
+[connection signal="pressed" from="CardMenu/VBoxContainer/HBoxContainer/BackToMainMenu" to="." method="show_main_menu"]
 [connection signal="pressed" from="EditCardMenu/EditCardMenuVBox/LastMenu" to="." method="show_last_menu"]
 [connection signal="pressed" from="DeckMenu/GridContainer/BackToMainMenu" to="." method="show_main_menu"]
 [connection signal="pressed" from="DeckMenu/GridContainer/NewDeck" to="NewDeckMenu" method="start_new_deck"]
-[connection signal="pressed" from="ConfigurationMenu/GridContainer/BackToMainMenu" to="." method="show_main_menu"]
+[connection signal="pressed" from="ConfigurationMenu/VBoxContainer/BackToMainMenu" to="." method="show_main_menu"]
 [connection signal="pressed" from="NewCardMenu/OverallMenu/LastMenu" to="." method="show_last_menu"]
 [connection signal="pressed" from="NewDeckMenu/VBoxContainer/HBoxContainer/BackButton" to="." method="show_last_menu"]
-[connection signal="pressed" from="ManageAttributesMenu/VBoxContainer/BackButton" to="." method="show_last_menu"]
 
 [editable path="EditCardMenu"]
 [editable path="NewCardMenu"]

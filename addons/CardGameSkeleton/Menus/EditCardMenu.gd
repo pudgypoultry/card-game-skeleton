@@ -66,10 +66,8 @@ func load_card_for_editing(card_name: String) -> void:
 	# If no local file found, check the "Card Face" attribute
 	if not found_image:
 		var art_path = ""
-		if card_data.has("Card Face"):
-			art_path = card_data["Card Face"]
-		elif card_data.has("Card Face Path"):
-			art_path = card_data["Card Face Path"]
+		if card_data.has("Front Face Location"):
+			art_path = card_data["Front Face Location"]
 			
 		if art_path != "" and ResourceLoader.exists(art_path):
 			final_texture = load(art_path)

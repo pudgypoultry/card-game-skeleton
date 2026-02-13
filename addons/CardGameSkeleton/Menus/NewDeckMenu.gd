@@ -13,13 +13,15 @@ extends MarginContainer
 @onready var delete_button: Button = $VBoxContainer/HBoxContainer/DeleteButton
 @onready var search_input: LineEdit = $VBoxContainer/DeckContent/DeckLibrary/HBoxContainer/SearchInput
 @onready var filter_dropdown: OptionButton = $VBoxContainer/DeckContent/DeckLibrary/HBoxContainer/FilterDropdown
+@onready var image_path_input: LineEdit = $VBoxContainer/HBoxContainer2/ImagePathInput
+@onready var deck_preview_image: TextureRect = $VBoxContainer/DeckPreviewImage
 
 var current_deck_cards: Array = []
 var current_deck_name: String = ""
 
-# Store filter logic
 var active_filter_key: String = ""
 var active_filter_value: String = ""
+
 
 func _ready() -> void:
 	save_button.pressed.connect(_on_save_pressed)
@@ -30,30 +32,30 @@ func _ready() -> void:
 	
 	visibility_changed.connect(_on_visibility_changed)
 
+
 func _on_visibility_changed() -> void:
 	if visible:
 		# Refresh filters in case attributes changed
 		_populate_filter_dropdown()
 		refresh_library()
 
-
+# TODO: DOUBLE CHECK THIS
 func _populate_filter_dropdown() -> void:
 	filter_dropdown.clear()
 	filter_dropdown.add_item("All Cards", 0)
 	
 	# Get attributes from settings
-	var attributes = card_library.get_custom_attributes()
-	
-	# Loop through attributes and look for "Selection" types (Enum 2)
-	for attr in attributes:
-		if attr is CardAttribute and attr.type == CardAttribute.AttributeType.SELECTION:
-			# Add a header or just list the options
-			# We store the "Key" (Attribute Name) and "Value" (Option) in metadata
-			for option in attr.selection_options:
-				filter_dropdown.add_item(attr.attribute_name + ": " + option)
-				# Store data to identify this filter later
-				var meta = {"key": attr.attribute_name, "value": option}
-				filter_dropdown.set_item_metadata(filter_dropdown.item_count - 1, meta)
+	if card_library:
+		var attributes = card_library.get_custom_attributes()
+		
+		# Loop through attributes and look for "Selection" types (Enum 2)
+		for attr in attributes:
+			if attr is CardAttribute and attr.type == CardAttribute.AttributeType.SELECTION:
+				for option in attr.selection_options:
+					filter_dropdown.add_item(attr.attribute_name + ": " + option)
+					var meta = {"key": attr.attribute_name, "value": option}
+					filter_dropdown.set_item_metadata(filter_dropdown.item_count - 1, meta)
+
 
 func _on_search_changed(new_text: String) -> void:
 	refresh_library()
@@ -74,7 +76,6 @@ func _on_filter_selected(index: int) -> void:
 func refresh_library() -> void:
 	if not card_library: return
 	
-	# Clear existing buttons
 	for child in library_grid.get_children():
 		child.queue_free()
 		
@@ -82,11 +83,10 @@ func refresh_library() -> void:
 	var card_names = data.keys()
 	card_names.sort()
 	
-	# 1. Setup Search & Path
 	var search_term = ""
 	if search_input:
 		search_term = search_input.text.to_lower().strip_edges()
-		
+	
 	var root_path = "res://Cards/"
 	if card_library.settings_resource and card_library.settings_resource.card_root_directory != "":
 		root_path = card_library.settings_resource.card_root_directory
@@ -104,33 +104,31 @@ func refresh_library() -> void:
 		var btn = Button.new()
 		btn.text = card_name
 		btn.custom_minimum_size = Vector2(100, 120)
-		btn.autowrap_mode = TextServer.AUTOWRAP_WORD
 		btn.clip_text = true
 		btn.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		btn.custom_minimum_size = Vector2(100,200)
 		btn.vertical_icon_alignment = VERTICAL_ALIGNMENT_TOP
 		btn.expand_icon = true
 		
+		# Use godot icon as default
 		var final_icon = preload("res://icon.svg")
 		var found_image = false
 		
-		var extensions = ["png", "jpg", "jpeg", "svg", "webp"]
-		for ext in extensions:
-			var test_path = root_path + card_name + "/" + card_name + "." + ext
-			if ResourceLoader.exists(test_path):
-				final_icon = load(test_path)
-				found_image = true
-				break
+		var art_path = ""
+		if info.has("Front Face Location"):
+			art_path = info["Front Face Location"]
+		
+		if art_path != "" and ResourceLoader.exists(art_path):
+			final_icon = load(art_path)
+			found_image = true
 		
 		if not found_image:
-			var art_path = ""
-			if info.has("Card Face"):
-				art_path = info["Card Face"]
-			elif info.has("Card Face Path"):
-				art_path = info["Card Face Path"]
-				
-			if art_path != "" and ResourceLoader.exists(art_path):
-				final_icon = load(art_path)
+			var extensions = ["png", "jpg", "jpeg", "svg", "webp"]
+			for ext in extensions:
+				var test_path = root_path + card_name + "/" + card_name + "." + ext
+				if ResourceLoader.exists(test_path):
+					final_icon = load(test_path)
+					found_image = true
+					break
 		
 		btn.icon = final_icon
 		
@@ -185,7 +183,7 @@ func _on_save_pressed() -> void:
 	
 	# If we renamed the deck, delete the old entry? 
 	# For now, let's just save as new/overwrite
-	card_library.save_deck(d_name, current_deck_cards)
+	card_library.save_deck(d_name, current_deck_cards, image_path_input.text)
 	print("Deck saved: " + d_name)
 
 
@@ -213,19 +211,33 @@ func load_deck(deck_name: String) -> void:
 	current_deck_name = deck_name
 	deck_name_input.text = deck_name
 	
-	if delete_button: delete_button.visible = true
+	if delete_button: 
+		delete_button.visible = true
 	
 	var all_decks = card_library.get_deck_dict()
 	
 	if all_decks.has(deck_name):
-		var saved_cards = all_decks[deck_name]
+		var deck_data = all_decks[deck_name]
 		
-		current_deck_cards = []
-		for card in saved_cards:
-			current_deck_cards.append(str(card))
+		if deck_data is Dictionary:
+			current_deck_cards = deck_data.get("cards", [])
+			var img = deck_data.get("image", "")
+			image_path_input.text = img
+			_update_deck_preview(img)
+		else:
+			current_deck_cards = deck_data
+			image_path_input.text = ""
+			_update_deck_preview("")
 			
 	else:
 		print("ERROR: Deck not found in dictionary!")
 		current_deck_cards = []
 		
 	_refresh_deck_list()
+
+
+func _update_deck_preview(path: String) -> void:
+	if path != "" and ResourceLoader.exists(path):
+		deck_preview_image.texture = load(path)
+	else:
+		deck_preview_image.texture = preload("res://icon.svg")

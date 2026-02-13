@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://byand5xhsw5e6"]
 
 [ext_resource type="Script" uid="uid://b13enk8cvhrj1" path="res://addons/CardGameSkeleton/Menus/EditCardMenu.gd" id="1_0xsnf"]
-[ext_resource type="PackedScene" uid="uid://dqkm4gg7p68af" path="res://addons/CardGameSkeleton/Resources/AttributeField.tscn" id="2_wjoui"]
+[ext_resource type="PackedScene" uid="uid://dqkm4gg7p68af" path="res://addons/CardGameSkeleton/Menus/AttributeField.tscn" id="2_wjoui"]
 [ext_resource type="PackedScene" uid="uid://dscpfc825fla0" path="res://addons/CardGameSkeleton/AbstractCard2D.tscn" id="4_ur6yf"]
 
 [node name="EditCardMenu" type="MarginContainer" node_paths=PackedStringArray("fields_container")]
@@ -10,7 +10,7 @@ anchor_right = 1.0
 offset_bottom = 121.0
 grow_horizontal = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 2
 script = ExtResource("1_0xsnf")
 field_scene = ExtResource("2_wjoui")
 fields_container = NodePath("EditCardMenuVBox/VBoxContainer")
@@ -23,6 +23,9 @@ alignment = 1
 [node name="CardArtPreview" type="TextureRect" parent="EditCardMenuVBox"]
 custom_minimum_size = Vector2(150, 200)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+expand_mode = 5
 stretch_mode = 5
 
 [node name="LastMenu" type="Button" parent="EditCardMenuVBox"]

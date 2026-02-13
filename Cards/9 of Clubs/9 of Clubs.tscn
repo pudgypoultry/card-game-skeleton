@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dia514cxkxorc"]
+
+[ext_resource type="Script" uid="uid://1oiu3jpvjn26" path="res://addons/CardGameSkeleton/CardLibrary/Card.gd" id="1_0sfgq"]
+[ext_resource type="Texture2D" uid="uid://bb0bt66di7f58" path="res://CardImages/CardBack.jpg" id="2_lqoon"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qdf6e"]
+load_path = "res://.godot/imported/King Of Hearts.png-9b937709c3a66aced29f160ee6ad8f0e.ctex"
+
+[node name="AbstractCard" type="Node2D" node_paths=PackedStringArray("cardFront", "cardBack")]
+script = ExtResource("1_0sfgq")
+card_name = "9 of Clubs"
+attributes = {
+"Card Name": "9 of Clubs",
+"Front Face Location": "res://CardImages/Clubs/C09.jpg",
+"Rank": 9.0,
+"Scene Location": "res://Cards/",
+"Suit": "Clubs"
+}
+cardFront = NodePath("CardFront")
+cardBack = NodePath("CardBack")
+
+[node name="CardFront" type="Sprite2D" parent="."]
+position = Vector2(0, -1.9073486e-06)
+scale = Vector2(1.3777777, 1.3777778)
+texture = SubResource("CompressedTexture2D_qdf6e")
+
+[node name="CardBack" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_lqoon")

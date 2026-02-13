@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ctei4xu74no6o"]
 
 [ext_resource type="Script" uid="uid://ky05a2wvdijt" path="res://addons/CardGameSkeleton/Menus/NewCardMenu.gd" id="1_rnt8f"]
-[ext_resource type="PackedScene" uid="uid://dqkm4gg7p68af" path="res://addons/CardGameSkeleton/Resources/AttributeField.tscn" id="2_y527x"]
+[ext_resource type="PackedScene" uid="uid://dqkm4gg7p68af" path="res://addons/CardGameSkeleton/Menus/AttributeField.tscn" id="2_y527x"]
 [ext_resource type="Script" uid="uid://chbsf4oc2bglf" path="res://addons/CardGameSkeleton/CardLibrary/SaveCard.gd" id="3_vbpew"]
 [ext_resource type="PackedScene" uid="uid://dscpfc825fla0" path="res://addons/CardGameSkeleton/AbstractCard2D.tscn" id="4_1ic80"]
 
@@ -17,6 +17,7 @@ fields_container = NodePath("OverallMenu/VBoxContainer")
 
 [node name="OverallMenu" type="VBoxContainer" parent="."]
 layout_mode = 2
+size_flags_horizontal = 4
 alignment = 1
 
 [node name="LastMenu" type="Button" parent="OverallMenu"]

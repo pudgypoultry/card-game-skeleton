@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqkm4gg7p68af"]
+
+[ext_resource type="Script" uid="uid://b70by2salnhd7" path="res://addons/CardGameSkeleton/Menus/AttributeField.gd" id="1_3lco0"]
+
+[node name="AttributeField" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3lco0")
+
+[node name="LabelName" type="Label" parent="."]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+
+[node name="InputContainer" type="Control" parent="."]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 3

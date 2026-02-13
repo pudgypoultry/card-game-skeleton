@@ -2,8 +2,7 @@
 extends MarginContainer
 
 @export var card_library: CardLibrary
-
-# UI References
+@export var back_button : Button
 @export var name_input: LineEdit
 @export var type_input: OptionButton
 @export var options_box : HBoxContainer
@@ -11,18 +10,18 @@ extends MarginContainer
 @export var save_button: Button
 @export var attribute_list_container: VBoxContainer
 
+
 func _ready() -> void:
-	# 1. Setup the Type Dropdown
 	type_input.clear()
 	type_input.add_item("Text", CardAttribute.AttributeType.TEXT)
 	type_input.add_item("Number", CardAttribute.AttributeType.NUMBER)
 	type_input.add_item("Selection", CardAttribute.AttributeType.SELECTION)
 	
-	# 2. Connect signals
 	type_input.item_selected.connect(_on_type_changed)
 	save_button.pressed.connect(_on_save_pressed)
+	if card_library:
+		back_button.pressed.connect(get_parent().show_last_menu)
 	
-	# 3. Initial Setup
 	_on_type_changed(0)
 	_refresh_list()
 
@@ -33,7 +32,6 @@ func _on_type_changed(index: int) -> void:
 
 
 func _on_save_pressed() -> void:
-	# Validation
 	if name_input.text.strip_edges() == "":
 		print("Error: Attribute name cannot be empty.")
 		return
@@ -42,7 +40,7 @@ func _on_save_pressed() -> void:
 		print("Error: CardLibrary or Settings Resource is missing.")
 		return
 	
-	# Create new Attribute
+	# Create new attribute
 	var new_attr = CardAttribute.new()
 	new_attr.attribute_name = name_input.text
 	new_attr.type = type_input.get_selected_id()
@@ -55,57 +53,52 @@ func _on_save_pressed() -> void:
 			clean_options.append(opt.strip_edges())
 		new_attr.selection_options = clean_options
 	
-	# Add to Resource
 	card_library.settings_resource.custom_attributes.append(new_attr)
 	_save_resource()
 	
-	# Clear form and refresh list
 	_clear_form()
 	_refresh_list()
 	
-	# emit changed signal
 	card_library.attributes_changed.emit()
 
 
 func _refresh_list() -> void:
-	# 1. Clear existing items
+	# Clear existing items
 	for child in attribute_list_container.get_children():
 		child.queue_free()
 		
 	if not card_library or not card_library.settings_resource:
 		return
 		
-	# 2. Loop through attributes
+	# Loop through attributes
 	var attributes = card_library.settings_resource.custom_attributes
 	for i in range(attributes.size()):
 		var attr = attributes[i]
 		
-		# Create a row
 		var row = HBoxContainer.new()
 		
-		# A. NAME LABEL (Expands to push everything else to the right)
+		# Name label
 		var name_label = Label.new()
 		name_label.text = attr.attribute_name
 		name_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		row.add_child(name_label)
 		
-		# B. TYPE LABEL (Fixed size, sits on the right)
+		# Type label
 		var type_label = Label.new()
 		var type_name = CardAttribute.AttributeType.keys()[attr.type]
-		type_label.text = type_name.capitalize() # e.g., "TEXT" -> "Text"
-		type_label.modulate = Color(0.7, 0.7, 0.7) # Grey text to distinguish it
+		type_label.text = type_name.capitalize()
+		type_label.modulate = Color(0.7, 0.7, 0.7)
 		row.add_child(type_label)
 		
-		# C. SEPARATOR (Optional tiny space)
+		# Separator
 		var spacer = Control.new()
 		spacer.custom_minimum_size = Vector2(10, 0)
 		row.add_child(spacer)
 		
-		# D. DELETE BUTTON
+		# Delete button
 		var delete_btn = Button.new()
 		delete_btn.text = "Delete"
 		
-		# --- SAFETY CHECK ---
 		if attr.attribute_name == "Card Name" or attr.attribute_name == "Scene Location":
 			delete_btn.disabled = true
 			delete_btn.modulate.a = 0.5 
@@ -123,32 +116,31 @@ func _create_list_row(attr: CardAttribute, index: int) -> void:
 	var row = HBoxContainer.new()
 	row.custom_minimum_size = Vector2(300, 0)
 	
-	# Name Label
+	# Name label
 	var name_label = Label.new()
 	name_label.text = attr.attribute_name
 	name_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(name_label)
 	
-	# Type Label
+	# Type label
 	var type_label = Label.new()
 	match attr.type:
 		CardAttribute.AttributeType.TEXT: type_label.text = "[Text]"
 		CardAttribute.AttributeType.NUMBER: type_label.text = "[Number]"
 		CardAttribute.AttributeType.SELECTION: type_label.text = "[Select]"
-	# Make it slightly dimmer to distinguish from name
+	
 	type_label.modulate = Color(0.7, 0.7, 0.7)
 	row.add_child(type_label)
 	
-	# Delete Button
+	# Delete button
 	var del_btn = Button.new()
 	del_btn.text = "X"
-	# We bind the index so the button knows which item to delete
 	del_btn.pressed.connect(_on_delete_pressed.bind(index))
 	del_btn.set_modulate(Color(1,0,0))
 	row.add_child(del_btn)
 	
 	attribute_list_container.add_child(row)
-	# print("Added " + str(row) + " to Existing Attributes")
+	print("Added " + str(row) + " to Existing Attributes")
 
 
 func _on_delete_pressed(index: int) -> void:

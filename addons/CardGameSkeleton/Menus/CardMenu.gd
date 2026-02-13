@@ -22,13 +22,12 @@ func populate_grid() -> void:
 	if not card_library or not grid_container:
 		return
 	
-	# Clear existing items
 	for child in grid_container.get_children():
 		if child.name == "BackToMainMenu": 
 			continue
 		child.queue_free()
 	
-	# Fetch Data
+	# Fetch data
 	var data = card_library.get_json_dict()
 	if not data or data.is_empty(): 
 		return
@@ -36,12 +35,12 @@ func populate_grid() -> void:
 	var card_names = data.keys()
 	card_names.sort()
 	
-	# Determine Root Path for images
+	# Try to get user's root path
 	var root_path = "res://Cards/"
 	if card_library.settings_resource and card_library.settings_resource.card_root_directory != "":
 		root_path = card_library.settings_resource.card_root_directory
 	
-	# Generate Buttons
+	# Generate buttons
 	for card_name in card_names:
 		var card_info = data[card_name]
 		var btn = Button.new()
@@ -56,28 +55,26 @@ func populate_grid() -> void:
 		var final_icon = preload("res://icon.svg") # Default Fallback
 		var found_image = false
 		
-		# Check the directory for an image 
-		var extensions = ["png", "jpg", "jpeg", "svg", "webp"]
-		for ext in extensions:
-			var test_path = root_path + card_name + "/" + card_name + "." + ext
-			if ResourceLoader.exists(test_path):
-				final_icon = load(test_path)
-				found_image = true
-				break
+		var art_path = ""
+		if card_info.has("Front Face Location"):
+			art_path = card_info["Front Face Location"]
+		
+		if art_path != "" and ResourceLoader.exists(art_path):
+			final_icon = load(art_path)
+			found_image = true
 		
 		if not found_image:
-			var art_path = ""
-			if card_info.has("Card Face"):
-				art_path = card_info["Card Face"]
-			elif card_info.has("Card Face Path"):
-				art_path = card_info["Card Face Path"]
-				
-			if art_path != "" and ResourceLoader.exists(art_path):
-				final_icon = load(art_path)
+			var extensions = ["png", "jpg", "jpeg", "svg", "webp"]
+			for ext in extensions:
+				var test_path = root_path + card_name + "/" + card_name + "." + ext
+				if ResourceLoader.exists(test_path):
+					final_icon = load(test_path)
+					found_image = true
+					break
 		
 		btn.icon = final_icon
+		
 		btn.pressed.connect(_on_card_clicked.bind(card_name))
-			
 		grid_container.add_child(btn)
 
 

@@ -140,9 +140,13 @@ func get_deck_dict() -> Dictionary:
 
 
 ## Saves a specific deck list to the JSON file
-func save_deck(deck_name: String, card_list: Array) -> void:
+func save_deck(deck_name: String, card_list: Array, image_path: String = "") -> void:
 	var decks = get_deck_dict()
-	decks[deck_name] = card_list
+	
+	decks[deck_name] = {
+		"cards": card_list,
+		"image": image_path
+	}
 	
 	var file = FileAccess.open(json_deck_file_path, FileAccess.WRITE)
 	var json_string = JSON.stringify(decks, "\t")
@@ -187,33 +191,33 @@ func save_dict_to_json(dict):
 
 func save_card_scene_to_file(card: Card) -> void:
 	var root_path = "res://Cards/"
-	var storage_style = CardProjectSettings.StorageStyle.SUBFOLDER
+	var use_subfolders = true
 	
 	if settings_resource:
 		if settings_resource.card_root_directory != "":
 			root_path = settings_resource.card_root_directory
-		storage_style = settings_resource.storage_style
-	
+		use_subfolders = (settings_resource.storage_style == CardProjectSettings.StorageStyle.SUBFOLDER)
+
+	# Determine target directory
 	var target_dir = root_path
 	
-	if card.attributes.has("Scene Location") and str(card.attributes["Scene Location"]) != "":
-		target_dir = str(card.attributes["Scene Location"])
-		if not target_dir.ends_with("/"):
-			target_dir += "/"
-	else:
-		if storage_style == CardProjectSettings.StorageStyle.SUBFOLDER:
-			target_dir = root_path + card.card_name + "/"
-		else:
-			target_dir = root_path
+	# Check the attribute
+	if card.attributes.has("Scene Location"):
+		var user_input_path = str(card.attributes["Scene Location"]).strip_edges()
+		if user_input_path != "":
+			target_dir = user_input_path
+			if not target_dir.ends_with("/"):
+				target_dir += "/"
 	
-	# Create directory
+	if use_subfolders and target_dir == root_path:
+		target_dir = target_dir + card.card_name + "/"
+	
+	# Create directory if needed
 	var dir = DirAccess.open("res://")
 	if not dir.dir_exists(target_dir):
 		var err = dir.make_dir_recursive_absolute(target_dir)
-		if err == OK:
-			print("Created directory: " + target_dir)
-		else:
-			print("Error creating directory: " + target_dir)
+		if err != OK:
+			print("Error creating directory '" + target_dir + "': " + str(err))
 			return
 			
 	# Save the file
@@ -221,10 +225,11 @@ func save_card_scene_to_file(card: Card) -> void:
 	
 	var packed_scene = PackedScene.new()
 	var result = packed_scene.pack(card)
+	
 	if result == OK:
 		var save_err = ResourceSaver.save(packed_scene, save_path)
 		if save_err == OK:
-			print("Saved card to: " + save_path)
+			print("Saved card scene to: " + save_path)
 		else:
 			print("Error saving resource: ", save_err)
 	else:

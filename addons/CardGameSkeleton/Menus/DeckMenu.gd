@@ -34,16 +34,21 @@ func populate_grid() -> void:
 	for deck_name in deck_names:
 		var btn = Button.new()
 		btn.text = deck_name
-		btn.custom_minimum_size = Vector2(120, 160)
-		btn.icon = preload("res://addons/CardGameSkeleton/Images/Decks.png")
+		btn.custom_minimum_size = Vector2(140, 180)
 		btn.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		btn.vertical_icon_alignment = VERTICAL_ALIGNMENT_TOP
 		btn.expand_icon = true
-		btn.autowrap_mode = TextServer.AUTOWRAP_WORD
 		
-		# Connect click to load functionality
+		var deck_data = decks[deck_name]
+		var final_icon = preload("res://addons/CardGameSkeleton/Images/Decks.png")
+		
+		if deck_data is Dictionary and deck_data.has("image"):
+			var img_path = deck_data["image"]
+			if img_path != "" and ResourceLoader.exists(img_path):
+				final_icon = load(img_path)
+		
+		btn.icon = final_icon
 		btn.pressed.connect(_on_deck_clicked.bind(deck_name))
-		
 		grid_container.add_child(btn)
 
 
