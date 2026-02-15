@@ -6,9 +6,13 @@ extends MarginContainer
 @export var deck_builder: Control
 @export var dock_control: Node
 
+@onready var search_input: LineEdit = $VBoxContainer/HBoxContainer2/Search
+
 
 func _ready() -> void:
 	visibility_changed.connect(_on_visibility_changed)
+	if search_input:
+		search_input.text_changed.connect(_on_search_text_changed)
 	if visible:
 		populate_grid()
 
@@ -16,6 +20,10 @@ func _ready() -> void:
 func _on_visibility_changed() -> void:
 	if visible:
 		populate_grid()
+
+
+func _on_search_text_changed(new_text: String) -> void:
+	populate_grid()
 
 
 func populate_grid() -> void:
@@ -29,7 +37,14 @@ func populate_grid() -> void:
 	var deck_names = decks.keys()
 	deck_names.sort()
 	
+	var search_term = ""
+	if search_input:
+		search_term = search_input.text.to_lower().strip_edges()
+	
 	for deck_name in deck_names:
+		if search_term != "" and not deck_name.to_lower().contains(search_term):
+			continue
+		
 		var btn = Button.new()
 		btn.text = deck_name
 		btn.custom_minimum_size = Vector2(140, 180)

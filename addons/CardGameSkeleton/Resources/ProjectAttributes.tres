@@ -29,4 +29,5 @@ selection_options = Array[String](["Clubs", "Diamonds", "Hearts", "Spades"])
 [resource]
 script = ExtResource("2_o5oo0")
 custom_attributes = Array[ExtResource("1_uk7gn")]([SubResource("Resource_uk7gn"), SubResource("Resource_cxecs"), SubResource("Resource_qslpy"), SubResource("Resource_o5oo0"), SubResource("Resource_d4nsh")])
+custom_card_scene_path = "res://Cards/AbstractCard2D.tscn"
 metadata/_custom_type_script = "uid://c6ghph748ex5o"

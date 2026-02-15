@@ -31,9 +31,25 @@ func on_pressed() -> void:
 		OS.alert("Please enter a Scene Location.", "Missing Information")
 		return
 	
-	# Instantiate and Setup Card
+	var scene_to_instantiate = card_scene
+	
+	# Check settings for a custom path
+	if card_json_manager.settings_resource and card_json_manager.settings_resource.custom_card_scene_path != "":
+		var custom_path = card_json_manager.settings_resource.custom_card_scene_path
+		if ResourceLoader.exists(custom_path):
+			scene_to_instantiate = load(custom_path)
+			print("Using Custom Template: " + custom_path)
+		else:
+			print("Warning: Custom template path invalid. Using default.")
+	
+	if not scene_to_instantiate:
+		print("Error: No valid Card Scene found.")
+		return
+	
+	# Instantiate and setup card
 	var new_card: Card = card_scene.instantiate()
 	
+	new_card.name = card_name
 	new_card.card_name = card_name
 	new_card.attributes = attribute_dict
 	

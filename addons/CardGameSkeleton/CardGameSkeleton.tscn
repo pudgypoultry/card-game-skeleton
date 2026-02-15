@@ -50,7 +50,7 @@ script = ExtResource("5_hqacc")
 
 [node name="MainMenu" type="MarginContainer" parent="."]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 6
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenu"]
 layout_mode = 2
@@ -83,7 +83,7 @@ menu_to_show = NodePath("../../../ConfigurationMenu")
 [node name="CardMenu" type="MarginContainer" parent="." node_paths=PackedStringArray("card_library", "grid_container", "edit_menu", "dock_control")]
 visible = false
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 6
 script = ExtResource("9_ilkbd")
 card_library = NodePath("../CardJSONManager")
 grid_container = NodePath("VBoxContainer/GridContainer")
@@ -93,23 +93,70 @@ dock_control = NodePath("..")
 [node name="VBoxContainer" type="VBoxContainer" parent="CardMenu"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CardMenu/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="CardMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 
-[node name="BackToMainMenu" type="TextureButton" parent="CardMenu/VBoxContainer/HBoxContainer"]
+[node name="BackToMainMenu" type="TextureButton" parent="CardMenu/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = ExtResource("11_2ew2f")
 
-[node name="NewCard" type="TextureButton" parent="CardMenu/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("menu_to_show")]
+[node name="NewCard" type="TextureButton" parent="CardMenu/VBoxContainer/HBoxContainer2" node_paths=PackedStringArray("menu_to_show")]
 layout_mode = 2
 texture_normal = ExtResource("12_wouvy")
 script = ExtResource("6_i8c3e")
 message = "New Card"
 menu_to_show = NodePath("../../../../NewCardMenu")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CardMenu/VBoxContainer"]
+layout_mode = 2
+
+[node name="SearchInput" type="LineEdit" parent="CardMenu/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Seach Cards..."
+
+[node name="FilterOptions" type="OptionButton" parent="CardMenu/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+selected = 0
+item_count = 5
+popup/item_0/text = "All Cards"
+popup/item_0/id = 0
+popup/item_1/text = "Suit: Clubs"
+popup/item_1/id = 1
+popup/item_2/text = "Suit: Diamonds"
+popup/item_2/id = 2
+popup/item_3/text = "Suit: Hearts"
+popup/item_3/id = 3
+popup/item_4/text = "Suit: Spades"
+popup/item_4/id = 4
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CardMenu/VBoxContainer"]
+layout_mode = 2
+
+[node name="OrderBy" type="OptionButton" parent="CardMenu/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+selected = 0
+item_count = 5
+popup/item_0/text = "Name"
+popup/item_0/id = 0
+popup/item_1/text = "Card Name"
+popup/item_1/id = 1
+popup/item_2/text = "Scene Location"
+popup/item_2/id = 2
+popup/item_3/text = "Front Face Location"
+popup/item_3/id = 3
+popup/item_4/text = "Rank"
+popup/item_4/id = 4
+
+[node name="SortDirection" type="Button" parent="CardMenu/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "Ascending"
 
 [node name="GridContainer" type="GridContainer" parent="CardMenu/VBoxContainer"]
 layout_mode = 2
@@ -119,12 +166,12 @@ columns = 3
 [node name="EditCardMenu" parent="." node_paths=PackedStringArray("card_library") instance=ExtResource("10_wbye6")]
 visible = false
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 6
 card_library = NodePath("../CardJSONManager")
 
 [node name="NewCardMenu" parent="." node_paths=PackedStringArray("card_library") instance=ExtResource("13_fgq2x")]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 6
 size_flags_vertical = 0
 card_library = NodePath("../CardJSONManager")
 
@@ -134,7 +181,7 @@ card_json_manager = NodePath("../../../CardJSONManager")
 [node name="DeckMenu" type="MarginContainer" parent="." node_paths=PackedStringArray("card_library", "grid_container", "deck_builder", "dock_control")]
 visible = false
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 6
 script = ExtResource("11_wt2xn")
 card_library = NodePath("../CardJSONManager")
 grid_container = NodePath("VBoxContainer/GridContainer")
@@ -159,6 +206,14 @@ texture_normal = ExtResource("11_2ew2f")
 layout_mode = 2
 texture_normal = ExtResource("15_hx06g")
 
+[node name="HBoxContainer2" type="HBoxContainer" parent="DeckMenu/VBoxContainer"]
+layout_mode = 2
+
+[node name="Search" type="LineEdit" parent="DeckMenu/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Search Decks..."
+
 [node name="GridContainer" type="GridContainer" parent="DeckMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -167,7 +222,7 @@ columns = 3
 [node name="NewDeckMenu" parent="." node_paths=PackedStringArray("card_library", "dock_control") instance=ExtResource("14_cjp2d")]
 visible = false
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 6
 card_library = NodePath("../CardJSONManager")
 dock_control = NodePath("..")
 
@@ -185,10 +240,16 @@ popup/item_3/id = 3
 popup/item_4/text = "Suit: Clubs"
 popup/item_4/id = 4
 
+[node name="OrderBy" parent="NewDeckMenu/VBoxContainer/DeckContent/DeckLibrary/HBoxContainer3" index="0"]
+selected = 0
+item_count = 1
+popup/item_0/text = "Name"
+popup/item_0/id = 0
+
 [node name="ConfigurationMenu" type="MarginContainer" parent="."]
 visible = false
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 6
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ConfigurationMenu"]
 layout_mode = 2
@@ -219,23 +280,23 @@ menu_to_show = NodePath("../../../PathSettingsMenu")
 visible = false
 custom_minimum_size = Vector2(500, 500)
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 6
 card_library = NodePath("../CardJSONManager")
 
 [node name="PathSettingsMenu" parent="." node_paths=PackedStringArray("card_library", "dock_control") instance=ExtResource("17_bp3mr")]
 visible = false
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 6
 card_library = NodePath("../CardJSONManager")
 dock_control = NodePath("..")
 
 [node name="PathInput" parent="PathSettingsMenu/VBoxContainer/HBoxContainer2" index="0"]
 text = "res://Cards/"
 
-[node name="SubfolderCheckbox" parent="PathSettingsMenu/VBoxContainer" index="4"]
+[node name="SubfolderCheckbox" parent="PathSettingsMenu/VBoxContainer" index="5"]
 button_pressed = true
 
-[connection signal="pressed" from="CardMenu/VBoxContainer/HBoxContainer/BackToMainMenu" to="." method="show_main_menu"]
+[connection signal="pressed" from="CardMenu/VBoxContainer/HBoxContainer2/BackToMainMenu" to="." method="show_main_menu"]
 [connection signal="pressed" from="EditCardMenu/EditCardMenuVBox/LastMenu" to="." method="show_last_menu"]
 [connection signal="pressed" from="NewCardMenu/OverallMenu/LastMenu" to="." method="show_last_menu"]
 [connection signal="pressed" from="DeckMenu/VBoxContainer/HBoxContainer/BackToMainMenu" to="." method="show_main_menu"]

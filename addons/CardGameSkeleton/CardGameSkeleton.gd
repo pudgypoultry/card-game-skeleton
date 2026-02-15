@@ -2,6 +2,7 @@
 extends EditorPlugin
 
 var toolbar
+var dock_instance
 
 func _enable_plugin() -> void:
 	# Add autoloads here.
@@ -26,4 +27,6 @@ func _enter_tree() -> void:
 
 func _exit_tree() -> void:
 	# Clean-up of the plugin goes here.
-	pass
+	if dock_instance:
+			remove_control_from_docks(toolbar)
+			toolbar.free()
