@@ -10,12 +10,15 @@ extends MarginContainer
 @onready var subfolder_checkbox : Button = $VBoxContainer/SubfolderCheckbox 
 @onready var template_path_input : LineEdit = $VBoxContainer/HBoxContainer3/CustomCardPathInput
 @onready var card_button_save_path : Button = $VBoxContainer/HBoxContainer3/SaveButton
+@onready var base_script_input: LineEdit = $VBoxContainer/HBoxContainer4/BaseScriptInput
+@onready var retarget_button: Button = $VBoxContainer/HBoxContainer4/RetargetButton
 
 func _ready() -> void:
 	save_button.pressed.connect(_on_template_path_save_pressed)
 	card_button_save_path.pressed.connect(_on_card_path_save_pressed)
 	back_button.pressed.connect(func(): if dock_control: dock_control.show_last_menu())
 	visibility_changed.connect(_on_visibility_changed)
+	retarget_button.pressed.connect(_on_retarget_pressed)
 
 
 func _on_visibility_changed() -> void:
@@ -25,6 +28,7 @@ func _on_visibility_changed() -> void:
 		
 		var is_subfolder = (card_library.settings_resource.storage_style == CardProjectSettings.StorageStyle.SUBFOLDER)
 		subfolder_checkbox.button_pressed = is_subfolder
+		base_script_input.text = card_library.settings_resource.base_card_script_path
 
 
 func _on_template_path_save_pressed() -> void:
@@ -70,3 +74,13 @@ func _on_card_path_save_pressed() -> void:
 		print("Settings Saved!")
 	else:
 		print("Error saving settings: ", err)
+
+
+func _on_retarget_pressed() -> void:
+	card_library.settings_resource.base_card_script_path = base_script_input.text
+	var new_base = base_script_input.text.strip_edges()
+	if new_base == "" or not ResourceLoader.exists(new_base):
+		print("Error: Invalid Base Script Path.")
+		return
+		
+	print("Starting Script Retargeting to: " + new_base)

@@ -7,3 +7,4 @@ enum StorageStyle { FLAT, SUBFOLDER }
 @export var custom_attributes : Array[CardAttribute]
 @export var storage_style : StorageStyle = StorageStyle.SUBFOLDER
 @export_file("*.tscn") var custom_card_scene_path : String = ""
+@export_file("*.gd") var base_card_script_path: String = "res://addons/CardGameSkeleton/CardLibrary/AbstractCard2D.gd"
