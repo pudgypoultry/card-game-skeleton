@@ -72,6 +72,9 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Save"
 
+[node name="HSeparator4" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
 [node name="ChangeBaseCardScript" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Change Location of Base Card Script"

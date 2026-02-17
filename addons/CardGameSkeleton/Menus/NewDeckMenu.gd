@@ -131,7 +131,7 @@ func refresh_library() -> void:
 	for child in library_grid.get_children():
 		child.queue_free()
 		
-	var data = card_library.get_json_dict()
+	var data = card_library.get_json_dict(card_library.json_deck_file_path)
 	var card_names = data.keys()
 	
 	_sort_cache_data = data 

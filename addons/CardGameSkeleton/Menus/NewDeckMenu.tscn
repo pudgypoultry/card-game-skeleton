@@ -93,6 +93,7 @@ popup/item_0/id = 0
 layout_mode = 2
 
 [node name="OrderBy" type="OptionButton" parent="VBoxContainer/DeckContent/DeckLibrary/HBoxContainer3"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
 [node name="SortDirection" type="Button" parent="VBoxContainer/DeckContent/DeckLibrary/HBoxContainer3"]

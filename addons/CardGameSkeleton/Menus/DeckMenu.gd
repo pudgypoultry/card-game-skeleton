@@ -1,6 +1,8 @@
 @tool
 extends MarginContainer
 
+## Manages the 
+
 @export var card_library: CardLibrary
 @export var grid_container: GridContainer
 @export var deck_builder: Control
@@ -29,7 +31,6 @@ func _on_search_text_changed(new_text: String) -> void:
 func populate_grid() -> void:
 	if not card_library or not grid_container: return
 	
-	# Clear old buttons
 	for child in grid_container.get_children():
 		child.queue_free()
 		

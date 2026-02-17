@@ -1,12 +1,19 @@
 @tool
-extends Node
 class_name CardLibrary
+extends Node
 
 ## This class handles the generation of card information by loading from the CardLibrary JSON file
+##
+## This handles the saving and loading of information entered into the addon's UI
+## If anything's going wrong in terms of JSON formatting, the issue is likely here lol
+
+signal attributes_changed
 
 @export var card_folder_file_path : String = "res://NewCards/"
 @export var card_loader : Node
+@export var deck_loader : Node
 @export var settings_resource : CardProjectSettings
+
 var json_card_file_path = "res://addons/CardGameSkeleton/CardLibrary/Cards.json"
 var json_deck_file_path = "res://addons/CardGameSkeleton/CardLibrary/Decks.json"
 var card_description_dict : Dictionary = {}
@@ -15,98 +22,22 @@ var card_tags_Dict : Dictionary = {}
 var resource_locations_dict : Dictionary = {}
 var card_face_locations_dict : Dictionary = {}
 
-signal attributes_changed
 
-## Helper function to retrieve the attributes from the resource
+## Helper function to retrieve the attributes from the ProjectAttributes resource
 func get_custom_attributes() -> Array:
 	if settings_resource:
 		return settings_resource.custom_attributes
 	else:
-		# Try to load default if not assigned in Inspector
 		var default_path = "res://addons/CardGameSkeleton/CardLibrary/ProjectAttributes.tres"
 		if ResourceLoader.exists(default_path):
 			settings_resource = load(default_path)
-			return settings_resource.attributes
+			return settings_resource.custom_attributes
 			
 		print("CardLibrary: No settings resource assigned and default not found.")
 		return []
 
 
-## This method grabs the relevant information for a given card object from the card library JSON
-## Edit this with your relevant types/tags/categories for your own card's anatomy
-func get_card_info(card):
-	var cardStats : Dictionary = {}
-	cardStats = {
-		"NAME" : card.cardName, 
-		"CARD_TEXT" : card_description_dict[card.card_name], 
-		"TAGS" : card_tags_Dict[card.card_name],
-		"RESOURCE_LOCATION" : resource_locations_dict["Card:" + card.card_name],
-		"CARD_FACE" : card_face_locations_dict[card.card_name]
-	}
-	return cardStats
-
-
-func load_card_json(path : String):
-	var file = FileAccess.open(path, FileAccess.READ)
-	
-	if file:
-		var json_text = file.get_as_text().strip_edges(true, true)
-		var json = JSON.new()
-		var parse_result = json.parse(json_text)
-		
-		if parse_result == OK:
-			var data = json.data
-			if data is Dictionary:
-				for key in data.keys():
-					if "NAME" in data[key]:
-						if "CARD_TEXT" in data[key]:
-							card_description_dict[data[key]["NAME"]] = data[key]["DESCRIPTION"]
-						if "TAGS" in data[key]:
-							card_tags_Dict[data[key]["NAME"]] = data[key]["TAGS"]
-						if "RESOURCE_LOCATION" in data[key]:
-							resource_locations_dict["Card:" + data[key]["NAME"]] = data[key]["RESOURCE_LOCATION"]
-						if "CARD_FACE" in data[key]:
-							card_face_locations_dict[data[key]["NAME"]] = data[key]["CARD_FACE"]
-			else:
-				print("Error: JSON data is not a dictionary")
-		else:
-			print("Error parsing JSON")
-		file.close()
-	else:
-		print("Error opening file")
-
-
-func save_card_library_to_json(card_elements : Dictionary):
-	var cards = get_all_cards()
-	var json_file : FileAccess = FileAccess.open(json_card_file_path, FileAccess.WRITE)
-	json_file.store_string(build_card_json(cards, card_elements))
-
-
-func get_all_cards():
-	var cards
-	var card_directory = DirAccess.open(card_folder_file_path)
-	if card_directory:
-		card_directory.list_dir_begin()
-		var file_name = card_directory.get_next()
-		while file_name != "":
-			if card_directory.current_is_dir():
-				print("Found Directory: " + file_name)
-			else:
-				print("Found File: " + file_name)
-			file_name = card_directory.get_next()
-	else:
-		print("An error occurred -- couldn't find a directory when trying to access path")
-
-
-func build_card_json(cards : Array[Card], card_elements : Dictionary):
-	var json_text = "{\n"
-	for card in cards:
-		var current_card_json = create_card_json_entry(card, card_elements)
-		json_text += current_card_json
-	json_text += "}"
-	return json_text
-
-
+## Helper function to create the string of a card for the JSON file
 func create_card_json_entry(card : Card, card_elements : Dictionary):
 	var json_text = "\"%s\" : {\n" % [card.card_name]
 	for element in card_elements.keys():
@@ -115,13 +46,12 @@ func create_card_json_entry(card : Card, card_elements : Dictionary):
 	return json_text
 
 
+## Takes a card scene and its elements and creates an entry for it in the JSON file
 func save_new_card_to_json(card : Card, card_elements : Dictionary):
-	var card_dict = get_json_dict()
-	# print("ORIGINAL STATE:	", str(card_dict))
+	var card_dict = get_json_dict(json_card_file_path)
 	card_dict[card.card_name] = card_elements
 	print("	Adding " + card.card_name + " to JSON dictionary")
-	# print("ALTERED STATE:	", str(card_dict))
-	save_dict_to_json(card_dict)
+	save_dict_to_json(card_dict, json_card_file_path)
 
 
 ## Returns the entire dictionary of decks
@@ -139,7 +69,7 @@ func get_deck_dict() -> Dictionary:
 	return {}
 
 
-## Saves a specific deck list to the JSON file
+## Saves a deck list to the JSON file
 func save_deck(deck_name: String, card_list: Array, image_path: String = "") -> void:
 	var decks = get_deck_dict()
 	
@@ -166,9 +96,9 @@ func delete_deck(deck_name: String) -> void:
 		file.store_string(json_string)
 		file.close()
 
-
-func get_json_dict():
-	var json_file : FileAccess = FileAccess.open(json_card_file_path, FileAccess.READ)
+## Helper function to return a dictionary from a given JSON file
+func get_json_dict(file_path : String):
+	var json_file : FileAccess = FileAccess.open(file_path, FileAccess.READ)
 	var json_text = json_file.get_as_text().strip_edges(true, true)
 	var json = JSON.new()
 	var parse_result = json.parse(json_text)
@@ -180,15 +110,15 @@ func get_json_dict():
 		return null
 
 
-
-func save_dict_to_json(dict):
-	var json_file : FileAccess = FileAccess.open(json_card_file_path, FileAccess.WRITE)
+## Saves a given dictionary to a given JSON file
+func save_dict_to_json(dict : Dictionary, file_path : String):
+	var json_file : FileAccess = FileAccess.open(file_path, FileAccess.WRITE)
 	var json_string = JSON.stringify(dict, "\t")
 	json_file.store_line(json_string)
-	# print("JOBS DONE ZUG ZUG")
 	json_file.close()
 
 
+## Takes in a card scene and saves it to the project's card directory
 func save_card_scene_to_file(card: Card) -> void:
 	var root_path = "res://Cards/"
 	var use_subfolders = true
@@ -197,11 +127,9 @@ func save_card_scene_to_file(card: Card) -> void:
 		if settings_resource.card_root_directory != "":
 			root_path = settings_resource.card_root_directory
 		use_subfolders = (settings_resource.storage_style == CardProjectSettings.StorageStyle.SUBFOLDER)
-
-	# Determine target directory
+	
 	var target_dir = root_path
 	
-	# Check the attribute
 	if card.attributes.has("Scene Location"):
 		var user_input_path = str(card.attributes["Scene Location"]).strip_edges()
 		if user_input_path != "":
@@ -212,7 +140,6 @@ func save_card_scene_to_file(card: Card) -> void:
 	if use_subfolders and target_dir == root_path:
 		target_dir = target_dir + card.card_name + "/"
 	
-	# Create directory if needed
 	var dir = DirAccess.open("res://")
 	if not dir.dir_exists(target_dir):
 		var err = dir.make_dir_recursive_absolute(target_dir)
@@ -222,10 +149,8 @@ func save_card_scene_to_file(card: Card) -> void:
 	
 	var script_save_path = target_dir + card.card_name + ".gd"
 	
-	# Generate the .gd file on disk
 	_create_inherited_script(card, script_save_path)
 	
-	# Load the new script
 	var new_script = load(script_save_path)
 	
 	if new_script:
@@ -237,7 +162,6 @@ func save_card_scene_to_file(card: Card) -> void:
 		card.card_name = cached_name
 		card.attributes = cached_attrs
 	
-	# Save the file
 	var save_path = target_dir + card.card_name + ".tscn"
 	
 	var packed_scene = PackedScene.new()
@@ -253,14 +177,13 @@ func save_card_scene_to_file(card: Card) -> void:
 		print("Error packing scene: ", result)
 
 
+## Deletes a card from the card JSON
 func delete_card(card_name: String) -> void:
-	# Remove from JSON Data
-	var data = get_json_dict()
+	var data = get_json_dict(json_card_file_path)
 	if data.has(card_name):
 		data.erase(card_name)
-		save_dict_to_json(data)
+		save_dict_to_json(data, json_card_file_path)
 	
-	# Remove the .tscn file
 	var file_path = card_folder_file_path + card_name + ".tscn"
 	var dir = DirAccess.open(card_folder_file_path)
 	if dir:

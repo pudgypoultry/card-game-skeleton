@@ -27,7 +27,7 @@ func load_card_for_editing(card_name: String) -> void:
 	_populate_empty_fields()
 	
 	# Fetch existing data
-	var data = card_library.get_json_dict()
+	var data = card_library.get_json_dict(card_library.json_card_file_path)
 	if not data.has(card_name):
 		print("Error: Card data not found for " + card_name)
 		return

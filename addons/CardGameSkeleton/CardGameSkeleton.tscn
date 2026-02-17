@@ -37,9 +37,10 @@ deck_menu = NodePath("DeckMenu")
 configuration_menu = NodePath("ConfigurationMenu")
 new_deck_menu = NodePath("NewDeckMenu")
 
-[node name="CardJSONManager" type="Node" parent="." node_paths=PackedStringArray("card_loader")]
+[node name="CardJSONManager" type="Node" parent="." node_paths=PackedStringArray("card_loader", "deck_loader")]
 script = ExtResource("2_hqacc")
 card_loader = NodePath("CardLoader")
+deck_loader = NodePath("DeckLoader")
 settings_resource = ExtResource("3_bp3mr")
 
 [node name="CardLoader" type="Node" parent="CardJSONManager"]
@@ -138,6 +139,7 @@ popup/item_4/id = 4
 layout_mode = 2
 
 [node name="OrderBy" type="OptionButton" parent="CardMenu/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(255, 0)
 layout_mode = 2
 selected = 0
 item_count = 5
@@ -242,9 +244,17 @@ popup/item_4/id = 4
 
 [node name="OrderBy" parent="NewDeckMenu/VBoxContainer/DeckContent/DeckLibrary/HBoxContainer3" index="0"]
 selected = 0
-item_count = 1
+item_count = 5
 popup/item_0/text = "Name"
 popup/item_0/id = 0
+popup/item_1/text = "Card Name"
+popup/item_1/id = 1
+popup/item_2/text = "Scene Location"
+popup/item_2/id = 2
+popup/item_3/text = "Front Face Location"
+popup/item_3/id = 3
+popup/item_4/text = "Rank"
+popup/item_4/id = 4
 
 [node name="ConfigurationMenu" type="MarginContainer" parent="."]
 visible = false

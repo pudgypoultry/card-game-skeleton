@@ -1,6 +1,8 @@
 @tool
 extends MarginContainer
 
+## Manages the MarginContainer containing the higher-level card menu
+
 @export var card_library: CardLibrary
 @export var grid_container: GridContainer
 @export var edit_menu: Control 
@@ -62,6 +64,7 @@ func _populate_sort_dropdown() -> void:
 				sort_dropdown.add_item(attr.attribute_name)
 
 
+## Sorts two items based on active_sort_key
 func _sort_cards_custom(a_name: String, b_name: String) -> bool:
 	var val_a
 	var val_b
@@ -72,10 +75,10 @@ func _sort_cards_custom(a_name: String, b_name: String) -> bool:
 	else:
 		var data_a = _sort_cache_data.get(a_name, {})
 		var data_b = _sort_cache_data.get(b_name, {})
-		val_a = data_a.get(active_sort_key, 0) # Default to 0 if missing
+		val_a = data_a.get(active_sort_key, 0)
 		val_b = data_b.get(active_sort_key, 0)
 	
-	if typeof(val_a) != typeof(val_b): # Force string if types mismatch
+	if typeof(val_a) != typeof(val_b):
 		val_a = str(val_a)
 		val_b = str(val_b) 
 	if is_descending:
@@ -106,11 +109,8 @@ func _populate_filter_dropdown() -> void:
 	filter_dropdown.clear()
 	filter_dropdown.add_item("All Cards", 0)
 	
-	# Get attributes from settings
 	if card_library:
 		var attributes = card_library.get_custom_attributes()
-		
-		# Loop through attributes and look for "Selection" types (Enum 2)
 		for attr in attributes:
 			if attr is CardAttribute and attr.type == CardAttribute.AttributeType.SELECTION:
 				for option in attr.selection_options:
@@ -126,7 +126,7 @@ func populate_grid() -> void:
 	for child in grid_container.get_children():
 		child.queue_free()
 		
-	var data = card_library.get_json_dict()
+	var data = card_library.get_json_dict(card_library.json_card_file_path)
 	var card_names = data.keys()
 	
 	_sort_cache_data = data
@@ -158,7 +158,6 @@ func populate_grid() -> void:
 		btn.vertical_icon_alignment = VERTICAL_ALIGNMENT_TOP
 		btn.expand_icon = true
 		
-		# Use godot icon as default
 		var final_icon = preload("res://icon.svg")
 		var found_image = false
 		

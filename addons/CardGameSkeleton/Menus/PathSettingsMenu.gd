@@ -84,3 +84,64 @@ func _on_retarget_pressed() -> void:
 		return
 		
 	print("Starting Script Retargeting to: " + new_base)
+	_retarget_all_scripts(new_base)
+
+
+func _retarget_all_scripts(new_base_path: String) -> void:
+	var root_path = "res://Cards/"
+	if card_library.settings_resource.card_root_directory != "":
+		root_path = card_library.settings_resource.card_root_directory
+		
+	var dir = DirAccess.open(root_path)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		
+		while file_name != "":
+			if dir.current_is_dir() and file_name != "." and file_name != "..":
+				# Found a card folder (e.g., "Dragon/")
+				# Look for the script inside: "Dragon/Dragon.gd"
+				var script_path = root_path + file_name + "/" + file_name + ".gd"
+				_update_script_inheritance(script_path, new_base_path)
+				
+			elif file_name.ends_with(".gd"):
+				# Found a flat script (e.g., "Dragon.gd")
+				var script_path = root_path + file_name
+				_update_script_inheritance(script_path, new_base_path)
+				
+			file_name = dir.get_next()
+		
+		print("Retargeting Complete.")
+		# Trigger a filesystem scan so Godot sees the changes
+		EditorInterface.get_resource_filesystem().scan()
+
+
+func _update_script_inheritance(file_path: String, new_base: String) -> void:
+	if not FileAccess.file_exists(file_path):
+		return
+	
+	var file = FileAccess.open(file_path, FileAccess.READ)
+	var content = file.get_as_text()
+	file.close()
+	
+	var lines = content.split("\n")
+	var new_lines = []
+	var modified = false
+	
+	for line in lines:
+		if line.strip_edges().begins_with("extends "):
+			var new_line = "extends \"%s\"" % new_base
+			if line.strip_edges() != new_line:
+				new_lines.append(new_line)
+				modified = true
+			else:
+				new_lines.append(line)
+		else:
+			new_lines.append(line)
+			
+	if modified:
+		var new_content = "\n".join(new_lines)
+		var write_file = FileAccess.open(file_path, FileAccess.WRITE)
+		write_file.store_string(new_content)
+		write_file.close()
+		print("Updated: " + file_path)

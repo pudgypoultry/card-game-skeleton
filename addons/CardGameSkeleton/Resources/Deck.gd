@@ -3,12 +3,7 @@ class_name Deck
 
 ## This script manages a deck object. 
 ## The deck should have a reference to the relevant player's hand or whatever array of cards that cards drawn from the deck will end up in.
-##
-## The description of the script, what it can do,
-## and any further detail.
-##
-## @tutorial:             https://example.com/tutorial_1
-## @tutorial(Tutorial 2): https://example.com/tutorial_2
+
 
 ## The image representing the player's deck
 @export var deckVisual : TextureRect
