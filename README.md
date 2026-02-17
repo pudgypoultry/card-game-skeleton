@@ -14,11 +14,7 @@ This addon provides a workflow for designing cards, managing data, building deck
 * Create, Read, Update, and Delete cards directly from the editor dock.
 * Automatically associates card art and scene files with data based on folder structure or custom paths.
 
-<img width="579" height="460" alt="image" src="https://github.com/user-attachments/assets/39ec9a94-0193-4c56-93c3-f4039b567255" />
-<img width="577" height="461" alt="image" src="https://github.com/user-attachments/assets/1ee50fd8-1ac4-4b4c-bda0-2d76eabe7d65" />
-<img width="582" height="546" alt="image" src="https://github.com/user-attachments/assets/321d9cc3-c3c2-4b0e-b7be-15eab9d63e0f" />
-
-
+<img width="1317" height="365" alt="image" src="https://github.com/user-attachments/assets/116b6dfe-2a31-4dc6-9e4c-1ca97cb00681" />
 
 ### Custom Attribute System
 * Allows the user to define their own custom card attributes (e.g., *Health, Mana, Power, Description*).
