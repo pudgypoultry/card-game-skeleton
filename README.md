@@ -39,7 +39,7 @@ This addon provides a workflow for designing cards, managing data, building deck
 * Building decks is easy with the card browser that lets the user search through their library of created cards.
 * Search cards via filtering by Name, Attribute and sorting or numerical stats.
   
-<img width="545" height="537" alt="image" src="https://github.com/user-attachments/assets/707e7554-9986-41fb-9e3f-303f05094b2e" />
+<img height="500" alt="image" src="https://github.com/user-attachments/assets/707e7554-9986-41fb-9e3f-303f05094b2e" />
 <img height="500" alt="image" src="https://github.com/user-attachments/assets/d1ef85be-ea29-4a92-aa72-96e988a75522" />
 
 
