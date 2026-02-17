@@ -4,6 +4,8 @@ An addon meant for building card games in **Godot 4.x**.
 
 This addon provides a workflow for designing cards, managing data, building decks, and instantiating card scenes within the Godot editor.
 
+(Images provided here are based on the example project based around a standard deck of 52 playing cards.)
+
 ## Features
 
 ### Card Database Management
@@ -12,9 +14,10 @@ This addon provides a workflow for designing cards, managing data, building deck
 * Create, Read, Update, and Delete cards directly from the editor dock.
 * Automatically associates card art and scene files with data based on folder structure or custom paths.
 
-<img width="576" height="297" alt="image" src="https://github.com/user-attachments/assets/18dfe46a-d741-48c7-a912-df14c194e5a2" />
-<img width="560" height="635" alt="image" src="https://github.com/user-attachments/assets/30f2f37e-c6ab-4632-ac7c-42967cc59237" />
-<img width="573" height="537" alt="image" src="https://github.com/user-attachments/assets/7c0b16c2-f656-4e82-bb96-9746f4ae3296" />
+<img width="579" height="460" alt="image" src="https://github.com/user-attachments/assets/39ec9a94-0193-4c56-93c3-f4039b567255" />
+<img width="577" height="461" alt="image" src="https://github.com/user-attachments/assets/1ee50fd8-1ac4-4b4c-bda0-2d76eabe7d65" />
+<img width="582" height="546" alt="image" src="https://github.com/user-attachments/assets/321d9cc3-c3c2-4b0e-b7be-15eab9d63e0f" />
+
 
 
 ### Custom Attribute System
@@ -43,7 +46,6 @@ This addon provides a workflow for designing cards, managing data, building deck
 <img width="539" height="933" alt="image" src="https://github.com/user-attachments/assets/d1ef85be-ea29-4a92-aa72-96e988a75522" />
 <img width="331" height="417" alt="image" src="https://github.com/user-attachments/assets/05f63bfb-a560-479b-a994-db24906d40a9" />
 <img width="334" height="612" alt="image" src="https://github.com/user-attachments/assets/fa04e775-969b-430b-b6d3-aeb41e8947f9" />
-
 
 ## Installation
 
