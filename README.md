@@ -40,9 +40,8 @@ This addon provides a workflow for designing cards, managing data, building deck
 * Search cards via filtering by Name, Attribute and sorting or numerical stats.
   
 <img width="545" height="537" alt="image" src="https://github.com/user-attachments/assets/707e7554-9986-41fb-9e3f-303f05094b2e" />
-<img width="539" height="933" alt="image" src="https://github.com/user-attachments/assets/d1ef85be-ea29-4a92-aa72-96e988a75522" />
-<img width="331" height="417" alt="image" src="https://github.com/user-attachments/assets/05f63bfb-a560-479b-a994-db24906d40a9" />
-<img width="334" height="612" alt="image" src="https://github.com/user-attachments/assets/fa04e775-969b-430b-b6d3-aeb41e8947f9" />
+<img height="500" alt="image" src="https://github.com/user-attachments/assets/d1ef85be-ea29-4a92-aa72-96e988a75522" />
+
 
 ## Installation
 
