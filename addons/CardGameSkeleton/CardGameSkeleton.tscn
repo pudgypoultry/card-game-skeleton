@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cm6pb4a0kyv4m"]
+[gd_scene load_steps=24 format=3 uid="uid://cm6pb4a0kyv4m"]
 
 [ext_resource type="Script" uid="uid://6j8xgw5owe8i" path="res://addons/CardGameSkeleton/Menus/DockControl.gd" id="1_1fqu4"]
 [ext_resource type="Script" uid="uid://ce4j7sxhv1alt" path="res://addons/CardGameSkeleton/CardLibrary/CardLibrary.gd" id="2_hqacc"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://v4p0bmiacq07" path="res://addons/CardGameSkeleton/Images/Menus/Decks.png" id="7_2ew2f"]
 [ext_resource type="Texture2D" uid="uid://l8xt0vsxemah" path="res://addons/CardGameSkeleton/Images/Menus/Configuration.png" id="8_hx06g"]
 [ext_resource type="Script" uid="uid://cb0o3fha5uvaa" path="res://addons/CardGameSkeleton/Menus/CardMenu.gd" id="9_ilkbd"]
+[ext_resource type="Texture2D" uid="uid://coofbxgmfgjxa" path="res://addons/CardGameSkeleton/Images/Menus/Notes.png" id="10_ilkbd"]
 [ext_resource type="PackedScene" uid="uid://byand5xhsw5e6" path="res://addons/CardGameSkeleton/Menus/EditCardMenu.tscn" id="10_wbye6"]
 [ext_resource type="Texture2D" uid="uid://ebbm7oigyxut" path="res://addons/CardGameSkeleton/Images/Menus/BackSquare.png" id="11_2ew2f"]
 [ext_resource type="Script" uid="uid://di0iq8ed0c6rb" path="res://addons/CardGameSkeleton/Menus/DeckMenu.gd" id="11_wt2xn"]
@@ -80,6 +81,14 @@ texture_normal = ExtResource("8_hx06g")
 script = ExtResource("6_i8c3e")
 message = "Configuration"
 menu_to_show = NodePath("../../../ConfigurationMenu")
+
+[node name="ReadMe" type="TextureButton" parent="MainMenu/VBoxContainer" node_paths=PackedStringArray("menu_to_show")]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("10_ilkbd")
+script = ExtResource("6_i8c3e")
+message = "ReadMe"
+menu_to_show = NodePath("../../../ReadMe")
 
 [node name="CardMenu" type="MarginContainer" parent="." node_paths=PackedStringArray("card_library", "grid_container", "edit_menu", "dock_control")]
 visible = false
@@ -184,6 +193,7 @@ card_json_manager = NodePath("../../../CardJSONManager")
 visible = false
 layout_mode = 2
 size_flags_horizontal = 6
+size_flags_vertical = 3
 script = ExtResource("11_wt2xn")
 card_library = NodePath("../CardJSONManager")
 grid_container = NodePath("VBoxContainer/GridContainer")
@@ -225,6 +235,7 @@ columns = 3
 visible = false
 layout_mode = 2
 size_flags_horizontal = 6
+size_flags_vertical = 3
 card_library = NodePath("../CardJSONManager")
 dock_control = NodePath("..")
 
@@ -306,6 +317,60 @@ text = "res://Cards/"
 [node name="SubfolderCheckbox" parent="PathSettingsMenu/VBoxContainer" index="5"]
 button_pressed = true
 
+[node name="ReadMe" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ReadMe"]
+layout_mode = 2
+alignment = 1
+
+[node name="BackToMainMenu" type="TextureButton" parent="ReadMe/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("13_i8c3e")
+
+[node name="HSeparator" type="HSeparator" parent="ReadMe/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ReadMe/VBoxContainer"]
+layout_mode = 2
+text = "READ ME"
+horizontal_alignment = 1
+
+[node name="ReadMe" type="Label" parent="ReadMe/VBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+text = "Note about \"Front Face Location\" attribute:
+The custom attribute \"Front Face Location\" is removable as card images are not required for the addon to work, but will be taken care of automatically if included. Back faces of cards should be added and maintained by the user in the user's default card scene itself.
+
+IMPORTANT: Deleting a card in the addon does *NOT* delete the scene or folder in the filesystem corresponding to that card. While I considered doing so, if the user included more items in that directory or scene, deleting it may create an issue and even adding an option to do so may allow for major accidents. In essence, the user is responsible for deleting files and directories."
+autowrap_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="ReadMe/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="ReadMe/VBoxContainer"]
+layout_mode = 2
+text = "CREDITS"
+horizontal_alignment = 1
+
+[node name="Credits" type="Label" parent="ReadMe/VBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+text = "Card Images:
+	http://www.marytcusack.com/maryc/decks/html/Cards/AvantBlue.html
+
+Example Project:
+	https://github.com/pudgypoultry/card-game-skeleton
+
+Special Thanks:
+	Sam Smith (Cervantes3), Nick Null (Jedadiah Jones), UO Game Dev club, outside discord
+"
+autowrap_mode = 2
+
 [connection signal="pressed" from="CardMenu/VBoxContainer/HBoxContainer2/BackToMainMenu" to="." method="show_main_menu"]
 [connection signal="pressed" from="EditCardMenu/EditCardMenuVBox/LastMenu" to="." method="show_last_menu"]
 [connection signal="pressed" from="NewCardMenu/OverallMenu/LastMenu" to="." method="show_last_menu"]
@@ -313,6 +378,7 @@ button_pressed = true
 [connection signal="pressed" from="DeckMenu/VBoxContainer/HBoxContainer/NewDeck" to="NewDeckMenu" method="start_new_deck"]
 [connection signal="pressed" from="NewDeckMenu/VBoxContainer/HBoxContainer/BackButton" to="." method="show_last_menu"]
 [connection signal="pressed" from="ConfigurationMenu/VBoxContainer/BackToMainMenu" to="." method="show_main_menu"]
+[connection signal="pressed" from="ReadMe/VBoxContainer/BackToMainMenu" to="." method="show_last_menu"]
 
 [editable path="EditCardMenu"]
 [editable path="NewCardMenu"]
