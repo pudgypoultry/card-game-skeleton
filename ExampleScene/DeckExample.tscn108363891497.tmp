@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://y0inqbup405e"]
+
+[ext_resource type="Script" uid="uid://djxxrhljeuvkd" path="res://ExampleScene/DeckExample.gd" id="1_qokt0"]
+[ext_resource type="Script" uid="uid://bkw0o6k7glh83" path="res://addons/CardGameSkeleton/CardLibrary/DeckLoader.gd" id="2_7kn4v"]
+[ext_resource type="Script" uid="uid://b1ipskycyw4oe" path="res://addons/CardGameSkeleton/CardLibrary/LoadCard.gd" id="3_jkx40"]
+[ext_resource type="Texture2D" uid="uid://bb0bt66di7f58" path="res://CardImages/CardBack.jpg" id="4_7kn4v"]
+
+[node name="DeckExample" type="Node2D"]
+script = ExtResource("1_qokt0")
+
+[node name="DeckLoader" type="Node" parent="."]
+script = ExtResource("2_7kn4v")
+metadata/_custom_type_script = "uid://bkw0o6k7glh83"
+
+[node name="CardLoader" type="Node" parent="."]
+script = ExtResource("3_jkx40")
+metadata/_custom_type_script = "uid://b1ipskycyw4oe"
+
+[node name="DeckVisual" type="Sprite2D" parent="."]
+texture = ExtResource("4_7kn4v")
+
+[node name="DrawPosition" type="Marker2D" parent="."]
+position = Vector2(-1075, 0)

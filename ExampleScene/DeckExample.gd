@@ -7,7 +7,7 @@ extends Node2D
 @onready var deck_visual : Sprite2D = $DeckVisual
 @onready var draw_position : Node2D = $DrawPosition
 ## the array representing the deck itself
-var deck : Array[PackedScene]
+var deck : Array[Card]
 ## the array representing the player's hand
 var hand : Array[Card]
 var originalSize : int
@@ -22,7 +22,7 @@ func _ready() -> void:
 	var cards_in_deck : Array = deck_loader.deck_dict[deck_name]["cards"]
 	for card in cards_in_deck:
 		deck.append(
-				card_loader.load_card_scene_from_path(
+				card_loader.get_card(
 				card_loader.card_dict[card]["Scene Location"] + 
 				card_loader.card_dict[card]["Card Name"] +
 				".tscn")
@@ -60,7 +60,7 @@ func clear_deck():
 func draw_from_top() -> Card:
 	if len(deck) <= 0:
 		return null
-	var new_card = deck.pop_front().instantiate()
+	var new_card = deck.pop_front()
 	get_tree().root.add_child(new_card)
 	new_card.global_position = draw_position.global_position
 	new_card.scale = scale
@@ -72,7 +72,12 @@ func draw_from_top() -> Card:
 func draw_from_bottom():
 	if len(deck) <= 0:
 		return null
-	return deck.pop_back()
+	var new_card = deck.pop_back().instantiate()
+	get_tree().root.add_child(new_card)
+	new_card.global_position = draw_position.global_position
+	new_card.scale = scale
+	card_loader.prepare_card(new_card)
+	return new_card
 
 
 ## Draws from a given position in the deck, removing the card from the deck and returning it

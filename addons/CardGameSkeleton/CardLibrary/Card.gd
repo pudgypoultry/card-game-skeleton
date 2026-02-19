@@ -16,6 +16,8 @@ var original_scale : Vector2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	print(card_name + " has been drawn")
+	get_viewport().physics_object_picking_sort = true
+	get_viewport().physics_object_picking_first_only = true
 	clickable_area.input_event.connect(_on_area_2d_input_event)
 
 
@@ -48,19 +50,16 @@ func _input(event: InputEvent) -> void:
 
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	# Start Dragging
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
+			get_viewport().set_input_as_handled()
 			dragging = true
-			# Calculate the difference between mouse and object position
-			# This prevents the object's center from snapping to the mouse immediately
 			drag_offset = global_position - get_global_mouse_position()
 			
-			# Visual feedback
 			original_scale = scale
 			original_z_index = z_index
-			z_index = 100 # Bring to front
-			scale = original_scale * 1.1 # Slight pop effect
+			z_index = 100
+			scale = original_scale * 1.1
 
 
 func _check_drop_zone() -> void:
