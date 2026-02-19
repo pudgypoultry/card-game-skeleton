@@ -3,364 +3,364 @@
 		"Card Name": "10 of Clubs",
 		"Front Face Location": "res://CardImages/Clubs/C10.jpg",
 		"Rank": 10.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/10 of Clubs/",
 		"Suit": "Clubs"
 	},
 	"10 of Diamonds": {
 		"Card Name": "10 of Diamonds",
 		"Front Face Location": "res://CardImages/Diamonds/D10.jpg",
 		"Rank": 10.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/10 of Diamonds/",
 		"Suit": "Diamonds"
 	},
 	"10 of Hearts": {
 		"Card Name": "10 of Hearts",
 		"Front Face Location": "res://CardImages/Hearts/H10.jpg",
 		"Rank": 10.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/10 of Hearts/",
 		"Suit": "Hearts"
 	},
 	"10 of Spades": {
 		"Card Name": "10 of Spades",
 		"Front Face Location": "res://CardImages/Spades/S10.jpg",
 		"Rank": 10.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/10 of Spades/",
 		"Suit": "Spades"
 	},
 	"2 of Clubs": {
 		"Card Name": "2 of Clubs",
 		"Front Face Location": "res://CardImages/Clubs/C02.jpg",
 		"Rank": 2.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/2 of Clubs/",
 		"Suit": "Clubs"
 	},
 	"2 of Diamonds": {
 		"Card Name": "2 of Diamonds",
 		"Front Face Location": "res://CardImages/Diamonds/D02.jpg",
 		"Rank": 2.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/2 of Diamonds/",
 		"Suit": "Diamonds"
 	},
 	"2 of Hearts": {
 		"Card Name": "2 of Hearts",
 		"Front Face Location": "res://CardImages/Hearts/H02.jpg",
 		"Rank": 2.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/2 of Hearts/",
 		"Suit": "Hearts"
 	},
 	"2 of Spades": {
 		"Card Name": "2 of Spades",
 		"Front Face Location": "res://CardImages/Spades/S02.jpg",
 		"Rank": 2.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/2 of Spades/",
 		"Suit": "Spades"
 	},
 	"3 of Clubs": {
 		"Card Name": "3 of Clubs",
 		"Front Face Location": "res://CardImages/Clubs/C03.jpg",
 		"Rank": 3.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/3 of Clubs/",
 		"Suit": "Clubs"
 	},
 	"3 of Diamonds": {
 		"Card Name": "3 of Diamonds",
 		"Front Face Location": "res://CardImages/Diamonds/D03.jpg",
 		"Rank": 3.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/3 of Diamonds/",
 		"Suit": "Diamonds"
 	},
 	"3 of Hearts": {
 		"Card Name": "3 of Hearts",
 		"Front Face Location": "res://CardImages/Hearts/H03.jpg",
 		"Rank": 3.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/3 of Hearts/",
 		"Suit": "Hearts"
 	},
 	"3 of Spades": {
 		"Card Name": "3 of Spades",
 		"Front Face Location": "res://CardImages/Spades/S03.jpg",
 		"Rank": 3.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/3 of Spades/",
 		"Suit": "Spades"
 	},
 	"4 of Clubs": {
 		"Card Name": "4 of Clubs",
 		"Front Face Location": "res://CardImages/Clubs/C04.jpg",
 		"Rank": 4.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/4 of Clubs/",
 		"Suit": "Clubs"
 	},
 	"4 of Diamonds": {
 		"Card Name": "4 of Diamonds",
 		"Front Face Location": "res://CardImages/Diamonds/D04.jpg",
 		"Rank": 4.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/4 of Diamonds/",
 		"Suit": "Diamonds"
 	},
 	"4 of Hearts": {
 		"Card Name": "4 of Hearts",
 		"Front Face Location": "res://CardImages/Hearts/H04.jpg",
 		"Rank": 4.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/4 of Hearts/",
 		"Suit": "Hearts"
 	},
 	"4 of Spades": {
 		"Card Name": "4 of Spades",
 		"Front Face Location": "res://CardImages/Spades/S04.jpg",
 		"Rank": 4.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/4 of Spades/",
 		"Suit": "Spades"
 	},
 	"5 of Clubs": {
 		"Card Name": "5 of Clubs",
 		"Front Face Location": "res://CardImages/Clubs/C05.jpg",
 		"Rank": 5.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/5 of Clubs/",
 		"Suit": "Clubs"
 	},
 	"5 of Diamonds": {
 		"Card Name": "5 of Diamonds",
 		"Front Face Location": "res://CardImages/Diamonds/D05.jpg",
 		"Rank": 5.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/5 of Diamonds/",
 		"Suit": "Diamonds"
 	},
 	"5 of Hearts": {
 		"Card Name": "5 of Hearts",
 		"Front Face Location": "res://CardImages/Hearts/H05.jpg",
 		"Rank": 5.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/5 of Hearts/",
 		"Suit": "Hearts"
 	},
 	"5 of Spades": {
 		"Card Name": "5 of Spades",
 		"Front Face Location": "res://CardImages/Spades/S05.jpg",
 		"Rank": 5.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/5 of Spades/",
 		"Suit": "Spades"
 	},
 	"6 of Clubs": {
 		"Card Name": "6 of Clubs",
 		"Front Face Location": "res://CardImages/Clubs/C06.jpg",
 		"Rank": 6.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/6 of Clubs/",
 		"Suit": "Clubs"
 	},
 	"6 of Diamonds": {
 		"Card Name": "6 of Diamonds",
 		"Front Face Location": "res://CardImages/Diamonds/D06.jpg",
 		"Rank": 6.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/6 of Diamonds/",
 		"Suit": "Diamonds"
 	},
 	"6 of Hearts": {
 		"Card Name": "6 of Hearts",
 		"Front Face Location": "res://CardImages/Hearts/H06.jpg",
 		"Rank": 6.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/6 of Hearts/",
 		"Suit": "Hearts"
 	},
 	"6 of Spades": {
 		"Card Name": "6 of Spades",
 		"Front Face Location": "res://CardImages/Spades/S06.jpg",
 		"Rank": 6.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/6 of Spades/",
 		"Suit": "Spades"
 	},
 	"7 of Clubs": {
 		"Card Name": "7 of Clubs",
 		"Front Face Location": "res://CardImages/Clubs/C07.jpg",
 		"Rank": 7.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/7 of Clubs/",
 		"Suit": "Clubs"
 	},
 	"7 of Diamonds": {
 		"Card Name": "7 of Diamonds",
 		"Front Face Location": "res://CardImages/Diamonds/D07.jpg",
 		"Rank": 7.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/7 of Diamonds/",
 		"Suit": "Diamonds"
 	},
 	"7 of Hearts": {
 		"Card Name": "7 of Hearts",
 		"Front Face Location": "res://CardImages/Hearts/H07.jpg",
 		"Rank": 7.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/7 of Hearts/",
 		"Suit": "Hearts"
 	},
 	"7 of Spades": {
 		"Card Name": "7 of Spades",
 		"Front Face Location": "res://CardImages/Spades/S07.jpg",
 		"Rank": 7.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/7 of Spades/",
 		"Suit": "Spades"
 	},
 	"8 of Clubs": {
 		"Card Name": "8 of Clubs",
 		"Front Face Location": "res://CardImages/Clubs/C08.jpg",
 		"Rank": 8.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/8 of Clubs/",
 		"Suit": "Clubs"
 	},
 	"8 of Diamonds": {
 		"Card Name": "8 of Diamonds",
 		"Front Face Location": "res://CardImages/Diamonds/D08.jpg",
 		"Rank": 8.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/8 of Diamonds/",
 		"Suit": "Diamonds"
 	},
 	"8 of Hearts": {
 		"Card Name": "8 of Hearts",
 		"Front Face Location": "res://CardImages/Hearts/H08.jpg",
 		"Rank": 8.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/8 of Hearts/",
 		"Suit": "Hearts"
 	},
 	"8 of Spades": {
 		"Card Name": "8 of Spades",
 		"Front Face Location": "res://CardImages/Spades/S08.jpg",
 		"Rank": 8.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/8 of Spades/",
 		"Suit": "Spades"
 	},
 	"9 of Clubs": {
 		"Card Name": "9 of Clubs",
 		"Front Face Location": "res://CardImages/Clubs/C09.jpg",
 		"Rank": 9.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/9 of Clubs/",
 		"Suit": "Clubs"
 	},
 	"9 of Diamonds": {
 		"Card Name": "9 of Diamonds",
 		"Front Face Location": "res://CardImages/Diamonds/D09.jpg",
 		"Rank": 9.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/9 of Diamonds/",
 		"Suit": "Diamonds"
 	},
 	"9 of Hearts": {
 		"Card Name": "9 of Hearts",
 		"Front Face Location": "res://CardImages/Hearts/H09.jpg",
 		"Rank": 9.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/9 of Hearts/",
 		"Suit": "Hearts"
 	},
 	"9 of Spades": {
 		"Card Name": "9 of Spades",
 		"Front Face Location": "res://CardImages/Spades/S09.jpg",
 		"Rank": 9.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/9 of Spades/",
 		"Suit": "Spades"
 	},
 	"Ace of Clubs": {
 		"Card Name": "Ace of Clubs",
 		"Front Face Location": "res://CardImages/Clubs/C01.jpg",
 		"Rank": 1.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/Ace of Clubs/",
 		"Suit": "Clubs"
 	},
 	"Ace of Diamonds": {
 		"Card Name": "Ace of Diamonds",
 		"Front Face Location": "res://CardImages/Diamonds/D01.jpg",
 		"Rank": 1.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/Ace of Diamonds/",
 		"Suit": "Diamonds"
 	},
 	"Ace of Hearts": {
 		"Card Name": "Ace of Hearts",
 		"Front Face Location": "res://CardImages/Hearts/H01.jpg",
 		"Rank": 1.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/Ace of Hearts/",
 		"Suit": "Hearts"
 	},
 	"Ace of Spades": {
 		"Card Name": "Ace of Spades",
 		"Front Face Location": "res://CardImages/Spades/S01.jpg",
 		"Rank": 1.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/Ace of Spades/",
 		"Suit": "Spades"
 	},
 	"Jack of Clubs": {
 		"Card Name": "Jack of Clubs",
 		"Front Face Location": "res://CardImages/Clubs/CC1J.jpg",
 		"Rank": 11.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/Jack of Clubs/",
 		"Suit": "Clubs"
 	},
 	"Jack of Diamonds": {
 		"Card Name": "Jack of Diamonds",
 		"Front Face Location": "res://CardImages/Diamonds/DC1J.jpg",
 		"Rank": 11.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/Jack of Diamonds/",
 		"Suit": "Diamonds"
 	},
 	"Jack of Hearts": {
 		"Card Name": "Jack of Hearts",
 		"Front Face Location": "res://CardImages/Hearts/HC1J.jpg",
 		"Rank": 11.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/Jack of Hearts/",
 		"Suit": "Hearts"
 	},
 	"Jack of Spades": {
 		"Card Name": "Jack of Spades",
 		"Front Face Location": "res://CardImages/Spades/SC1J.jpg",
 		"Rank": 11.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/Jack of Spades/",
 		"Suit": "Spades"
 	},
 	"King of Clubs": {
 		"Card Name": "King of Clubs",
 		"Front Face Location": "res://CardImages/Clubs/CC3K.jpg",
 		"Rank": 13.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/King of Clubs/",
 		"Suit": "Clubs"
 	},
 	"King of Diamonds": {
 		"Card Name": "King of Diamonds",
 		"Front Face Location": "res://CardImages/Diamonds/DC3K.jpg",
 		"Rank": 13.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/King of Diamonds/",
 		"Suit": "Diamonds"
 	},
 	"King of Hearts": {
 		"Card Name": "King of Hearts",
 		"Front Face Location": "res://CardImages/Hearts/HC3K.jpg",
 		"Rank": 13.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/King of Hearts/",
 		"Suit": "Hearts"
 	},
 	"King of Spades": {
 		"Card Name": "King of Spades",
 		"Front Face Location": "res://CardImages/Spades/SC3K.jpg",
 		"Rank": 13.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/King of Spades/",
 		"Suit": "Spades"
 	},
 	"Queen of Clubs": {
 		"Card Name": "Queen of Clubs",
 		"Front Face Location": "res://CardImages/Clubs/CC2Q.jpg",
 		"Rank": 12.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/Queen of Clubs/",
 		"Suit": "Clubs"
 	},
 	"Queen of Diamonds": {
 		"Card Name": "Queen of Diamonds",
 		"Front Face Location": "res://CardImages/Diamonds/DC2Q.jpg",
 		"Rank": 12.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/Queen of Diamonds/",
 		"Suit": "Diamonds"
 	},
 	"Queen of Hearts": {
 		"Card Name": "Queen of Hearts",
 		"Front Face Location": "res://CardImages/Hearts/HC2Q.jpg",
 		"Rank": 12.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/Queen of Hearts/",
 		"Suit": "Hearts"
 	},
 	"Queen of Spades": {
 		"Card Name": "Queen of Spades",
 		"Front Face Location": "res://CardImages/Spades/SC2Q.jpg",
 		"Rank": 12.0,
-		"Scene Location": "res://Cards/",
+		"Scene Location": "res://Cards/Queen of Spades/",
 		"Suit": "Spades"
 	}
 }

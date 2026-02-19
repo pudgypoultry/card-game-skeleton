@@ -10,8 +10,6 @@ extends Node
 signal attributes_changed
 
 @export var card_folder_file_path : String = "res://NewCards/"
-@export var card_loader : Node
-@export var deck_loader : Node
 @export var settings_resource : CardProjectSettings
 
 var json_card_file_path = "res://addons/CardGameSkeleton/CardLibrary/Cards.json"
@@ -47,11 +45,11 @@ func create_card_json_entry(card : Card, card_elements : Dictionary):
 
 
 ## Takes a card scene and its elements and creates an entry for it in the JSON file
-func save_new_card_to_json(card : Card, card_elements : Dictionary):
-	var card_dict = get_json_dict(json_card_file_path)
-	card_dict[card.card_name] = card_elements
-	print("	Adding " + card.card_name + " to JSON dictionary")
-	save_dict_to_json(card_dict, json_card_file_path)
+func save_new_card_to_json(card: Card, attributes: Dictionary) -> void:
+	var data = get_json_dict(json_card_file_path)
+	data[card.card_name] = attributes
+	save_dict_to_json(data, json_card_file_path)
+	print("Saved to JSON: " + card.card_name)
 
 
 ## Returns the entire dictionary of decks

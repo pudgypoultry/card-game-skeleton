@@ -19,6 +19,7 @@ func _ready() -> void:
 	back_button.pressed.connect(func(): if dock_control: dock_control.show_last_menu())
 	visibility_changed.connect(_on_visibility_changed)
 	retarget_button.pressed.connect(_on_retarget_pressed)
+	subfolder_checkbox.toggled.connect(_on_subfolder_toggled)
 
 
 func _on_visibility_changed() -> void:
@@ -145,3 +146,22 @@ func _update_script_inheritance(file_path: String, new_base: String) -> void:
 		write_file.store_string(new_content)
 		write_file.close()
 		print("Updated: " + file_path)
+
+
+func _on_subfolder_toggled(toggled_on: bool) -> void:
+	if not card_library or not card_library.settings_resource:
+		return
+		
+	if toggled_on:
+		card_library.settings_resource.storage_style = CardProjectSettings.StorageStyle.SUBFOLDER
+		print("Storage Style set to: Subfolders (Folder per card)")
+	else:
+		card_library.settings_resource.storage_style = CardProjectSettings.StorageStyle.FLAT
+		print("Storage Style set to: Flat (All in root)")
+		
+	var err = ResourceSaver.save(card_library.settings_resource, card_library.settings_resource.resource_path)
+	
+	if err == OK:
+		print("Settings Auto-Saved.")
+	else:
+		push_error("Error auto-saving settings: " + str(err))

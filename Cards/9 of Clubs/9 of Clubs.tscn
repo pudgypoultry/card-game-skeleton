@@ -1,23 +1,33 @@
-[gd_scene load_steps=3 format=3 uid="uid://dia514cxkxorc"]
+[gd_scene load_steps=4 format=3 uid="uid://dia514cxkxorc"]
 
-[ext_resource type="Script" path="res://Cards/9 of Clubs/9 of Clubs.gd" id="1_0sfgq"]
+[ext_resource type="Script" uid="uid://blv0r7qai5yxj" path="res://Cards/9 of Clubs/9 of Clubs.gd" id="1_0sfgq"]
 [ext_resource type="Texture2D" uid="uid://bb0bt66di7f58" path="res://CardImages/CardBack.jpg" id="2_lqoon"]
 
-[node name="9 of Clubs" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q33nu"]
+size = Vector2(1000, 1388)
+
+[node name="AbstractCard" type="Node2D"]
 script = ExtResource("1_0sfgq")
 card_name = "9 of Clubs"
 attributes = {
 "Card Name": "9 of Clubs",
 "Front Face Location": "res://CardImages/Clubs/C09.jpg",
 "Rank": 9.0,
-"Scene Location": "res://Cards/",
+"Scene Location": "res://Cards/9 of Clubs/",
 "Suit": "Clubs"
 }
 
 [node name="CardFront" type="Sprite2D" parent="."]
 position = Vector2(0, -1.9073486e-06)
 scale = Vector2(1.3777777, 1.3777778)
+texture = ExtResource("2_lqoon")
 
 [node name="CardBack" type="Sprite2D" parent="."]
 visible = false
 texture = ExtResource("2_lqoon")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_q33nu")

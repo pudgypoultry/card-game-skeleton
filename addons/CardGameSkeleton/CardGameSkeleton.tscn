@@ -1,10 +1,8 @@
-[gd_scene load_steps=24 format=3 uid="uid://cm6pb4a0kyv4m"]
+[gd_scene load_steps=22 format=3 uid="uid://cm6pb4a0kyv4m"]
 
 [ext_resource type="Script" uid="uid://6j8xgw5owe8i" path="res://addons/CardGameSkeleton/Menus/DockControl.gd" id="1_1fqu4"]
 [ext_resource type="Script" uid="uid://ce4j7sxhv1alt" path="res://addons/CardGameSkeleton/CardLibrary/CardLibrary.gd" id="2_hqacc"]
 [ext_resource type="Resource" uid="uid://djc5t44vso6ar" path="res://addons/CardGameSkeleton/Resources/ProjectAttributes.tres" id="3_bp3mr"]
-[ext_resource type="Script" uid="uid://b1ipskycyw4oe" path="res://addons/CardGameSkeleton/CardLibrary/LoadCard.gd" id="4_4kup4"]
-[ext_resource type="Script" uid="uid://bkw0o6k7glh83" path="res://addons/CardGameSkeleton/CardLibrary/DeckLoader.gd" id="5_hqacc"]
 [ext_resource type="Texture2D" uid="uid://cax1mfkf7phhf" path="res://addons/CardGameSkeleton/Images/Menus/Cards.png" id="5_kij7y"]
 [ext_resource type="Script" uid="uid://benn2aran64n6" path="res://addons/CardGameSkeleton/Menus/CGSMenuButton.gd" id="6_i8c3e"]
 [ext_resource type="Texture2D" uid="uid://v4p0bmiacq07" path="res://addons/CardGameSkeleton/Images/Menus/Decks.png" id="7_2ew2f"]
@@ -38,17 +36,9 @@ deck_menu = NodePath("DeckMenu")
 configuration_menu = NodePath("ConfigurationMenu")
 new_deck_menu = NodePath("NewDeckMenu")
 
-[node name="CardJSONManager" type="Node" parent="." node_paths=PackedStringArray("card_loader", "deck_loader")]
+[node name="CardJSONManager" type="Node" parent="."]
 script = ExtResource("2_hqacc")
-card_loader = NodePath("CardLoader")
-deck_loader = NodePath("DeckLoader")
 settings_resource = ExtResource("3_bp3mr")
-
-[node name="CardLoader" type="Node" parent="CardJSONManager"]
-script = ExtResource("4_4kup4")
-
-[node name="DeckLoader" type="Node" parent="CardJSONManager"]
-script = ExtResource("5_hqacc")
 
 [node name="MainMenu" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -254,10 +244,7 @@ popup/item_4/text = "Suit: Clubs"
 popup/item_4/id = 4
 
 [node name="OrderBy" parent="NewDeckMenu/VBoxContainer/DeckContent/DeckLibrary/HBoxContainer3" index="0"]
-selected = 0
 item_count = 5
-popup/item_0/text = "Name"
-popup/item_0/id = 0
 popup/item_1/text = "Card Name"
 popup/item_1/id = 1
 popup/item_2/text = "Scene Location"
@@ -343,7 +330,9 @@ horizontal_alignment = 1
 [node name="ReadMe" type="Label" parent="ReadMe/VBoxContainer"]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-text = "Note about \"Front Face Location\" attribute:
+text = "The AbstractCard2D scene can be found in the addon's resource folder, this is meant to be an example. You can use it if you'd like, but I would highly recommend making your own that links to the LoadCard script used in the example 2D scene.
+
+Note about \"Front Face Location\" attribute:
 The custom attribute \"Front Face Location\" is removable as card images are not required for the addon to work, but will be taken care of automatically if included. Back faces of cards should be added and maintained by the user in the user's default card scene itself.
 
 IMPORTANT: Deleting a card in the addon does *NOT* delete the scene or folder in the filesystem corresponding to that card. While I considered doing so, if the user included more items in that directory or scene, deleting it may create an issue and even adding an option to do so may allow for major accidents. In essence, the user is responsible for deleting files and directories."
@@ -360,14 +349,17 @@ horizontal_alignment = 1
 [node name="Credits" type="Label" parent="ReadMe/VBoxContainer"]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-text = "Card Images:
-	http://www.marytcusack.com/maryc/decks/html/Cards/AvantBlue.html
+text = "Developed by: 
+Andrew Teske (Axiomata.itch.io)
+
+Card Images:
+http://www.marytcusack.com/maryc/decks/html/Cards/AvantBlue.html
 
 Example Project:
-	https://github.com/pudgypoultry/card-game-skeleton
+https://github.com/pudgypoultry/card-game-skeleton
 
 Special Thanks:
-	Sam Smith (Cervantes3), Nick Null (Jedadiah Jones), UO Game Dev club, outside discord
+Sam Smith (Cervantes3), Nick Null (Jedadiah Jones), UO Game Dev club, outside discord
 "
 autowrap_mode = 2
 

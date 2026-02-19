@@ -1,23 +1,33 @@
-[gd_scene load_steps=3 format=3 uid="uid://bu0uafmpn6bnx"]
+[gd_scene load_steps=4 format=3 uid="uid://bu0uafmpn6bnx"]
 
-[ext_resource type="Script" path="res://Cards/3 of Diamonds/3 of Diamonds.gd" id="1_tfw85"]
+[ext_resource type="Script" uid="uid://qta6nnfspgn6" path="res://Cards/3 of Diamonds/3 of Diamonds.gd" id="1_tfw85"]
 [ext_resource type="Texture2D" uid="uid://bb0bt66di7f58" path="res://CardImages/CardBack.jpg" id="2_j8nl7"]
 
-[node name="3 of Diamonds" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q33nu"]
+size = Vector2(1000, 1388)
+
+[node name="AbstractCard" type="Node2D"]
 script = ExtResource("1_tfw85")
 card_name = "3 of Diamonds"
 attributes = {
 "Card Name": "3 of Diamonds",
 "Front Face Location": "res://CardImages/Diamonds/D03.jpg",
 "Rank": 3.0,
-"Scene Location": "res://Cards/",
+"Scene Location": "res://Cards/3 of Diamonds/",
 "Suit": "Diamonds"
 }
 
 [node name="CardFront" type="Sprite2D" parent="."]
 position = Vector2(0, -1.9073486e-06)
 scale = Vector2(1.3777777, 1.3777778)
+texture = ExtResource("2_j8nl7")
 
 [node name="CardBack" type="Sprite2D" parent="."]
 visible = false
 texture = ExtResource("2_j8nl7")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_q33nu")

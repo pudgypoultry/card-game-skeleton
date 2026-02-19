@@ -1,23 +1,33 @@
-[gd_scene load_steps=3 format=3 uid="uid://ca164im5smf4j"]
+[gd_scene load_steps=4 format=3 uid="uid://ca164im5smf4j"]
 
-[ext_resource type="Script" path="res://Cards/5 of Spades/5 of Spades.gd" id="1_pptc7"]
+[ext_resource type="Script" uid="uid://dojgup3464e1f" path="res://Cards/5 of Spades/5 of Spades.gd" id="1_pptc7"]
 [ext_resource type="Texture2D" uid="uid://bb0bt66di7f58" path="res://CardImages/CardBack.jpg" id="2_wk4g5"]
 
-[node name="5 of Spades" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q33nu"]
+size = Vector2(1000, 1388)
+
+[node name="AbstractCard" type="Node2D"]
 script = ExtResource("1_pptc7")
 card_name = "5 of Spades"
 attributes = {
 "Card Name": "5 of Spades",
 "Front Face Location": "res://CardImages/Spades/S05.jpg",
 "Rank": 5.0,
-"Scene Location": "res://Cards/",
+"Scene Location": "res://Cards/5 of Spades/",
 "Suit": "Spades"
 }
 
 [node name="CardFront" type="Sprite2D" parent="."]
 position = Vector2(0, -1.9073486e-06)
 scale = Vector2(1.3777777, 1.3777778)
+texture = ExtResource("2_wk4g5")
 
 [node name="CardBack" type="Sprite2D" parent="."]
 visible = false
 texture = ExtResource("2_wk4g5")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_q33nu")

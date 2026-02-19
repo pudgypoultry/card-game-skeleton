@@ -1,23 +1,33 @@
-[gd_scene load_steps=3 format=3 uid="uid://4p1ocddkdoi8"]
+[gd_scene load_steps=4 format=3 uid="uid://4p1ocddkdoi8"]
 
-[ext_resource type="Script" path="res://Cards/7 of Hearts/7 of Hearts.gd" id="1_kl8og"]
+[ext_resource type="Script" uid="uid://dcxf2i26qyhxw" path="res://Cards/7 of Hearts/7 of Hearts.gd" id="1_kl8og"]
 [ext_resource type="Texture2D" uid="uid://bb0bt66di7f58" path="res://CardImages/CardBack.jpg" id="2_lh3xw"]
 
-[node name="7 of Hearts" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q33nu"]
+size = Vector2(1000, 1388)
+
+[node name="AbstractCard" type="Node2D"]
 script = ExtResource("1_kl8og")
 card_name = "7 of Hearts"
 attributes = {
 "Card Name": "7 of Hearts",
 "Front Face Location": "res://CardImages/Hearts/H07.jpg",
 "Rank": 7.0,
-"Scene Location": "res://Cards/",
+"Scene Location": "res://Cards/7 of Hearts/",
 "Suit": "Hearts"
 }
 
 [node name="CardFront" type="Sprite2D" parent="."]
 position = Vector2(0, -1.9073486e-06)
 scale = Vector2(1.3777777, 1.3777778)
+texture = ExtResource("2_lh3xw")
 
 [node name="CardBack" type="Sprite2D" parent="."]
 visible = false
 texture = ExtResource("2_lh3xw")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_q33nu")

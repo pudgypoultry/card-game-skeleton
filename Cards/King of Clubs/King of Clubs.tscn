@@ -1,23 +1,33 @@
-[gd_scene load_steps=3 format=3 uid="uid://xxwglybidli3"]
+[gd_scene load_steps=4 format=3 uid="uid://xxwglybidli3"]
 
-[ext_resource type="Script" path="res://Cards/King of Clubs/King of Clubs.gd" id="1_nobct"]
+[ext_resource type="Script" uid="uid://4i31m5a2ueoj" path="res://Cards/King of Clubs/King of Clubs.gd" id="1_nobct"]
 [ext_resource type="Texture2D" uid="uid://bb0bt66di7f58" path="res://CardImages/CardBack.jpg" id="2_a4bqc"]
 
-[node name="King of Clubs" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q33nu"]
+size = Vector2(1000, 1388)
+
+[node name="AbstractCard" type="Node2D"]
 script = ExtResource("1_nobct")
 card_name = "King of Clubs"
 attributes = {
 "Card Name": "King of Clubs",
 "Front Face Location": "res://CardImages/Clubs/CC3K.jpg",
 "Rank": 13.0,
-"Scene Location": "res://Cards/",
+"Scene Location": "res://Cards/King of Clubs/",
 "Suit": "Clubs"
 }
 
 [node name="CardFront" type="Sprite2D" parent="."]
 position = Vector2(0, -1.9073486e-06)
 scale = Vector2(1.3777777, 1.3777778)
+texture = ExtResource("2_a4bqc")
 
 [node name="CardBack" type="Sprite2D" parent="."]
 visible = false
 texture = ExtResource("2_a4bqc")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_q33nu")

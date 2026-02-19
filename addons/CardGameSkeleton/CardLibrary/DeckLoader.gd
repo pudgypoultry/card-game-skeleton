@@ -1,5 +1,5 @@
-@tool
 extends Node
+class_name DeckLoader
 
 ## This node holds a reference to the current state of the card dict for gameplay purposes
 

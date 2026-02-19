@@ -1,15 +1,22 @@
-extends Node
+extends Node2D
 
 class_name Card
 
+@onready var card_front : Sprite2D = $CardFront
+@onready var clickable_area : Area2D = $Area2D
+
 @export var card_name: String
 @export var attributes : Dictionary = {}
-@export var cardFront : Sprite2D
-@export var cardBack : Sprite2D
+
+var dragging : bool = false
+var drag_offset : Vector2 = Vector2.ZERO
+var original_z_index : int = 0
+var original_scale : Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	print(card_name + " has been drawn")
+	clickable_area.input_event.connect(_on_area_2d_input_event)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -17,6 +24,45 @@ func _process(delta: float) -> void:
 	pass
 
 
-func FlipCard():
-	cardFront.visible = !cardFront.visibile
-	cardBack.visible = !cardBack.visibile
+func _input(event: InputEvent) -> void:
+	# Use _input() for the drag and release because the mouse might move 
+	# 	faster than the Area2D can track, or leave the Area2D while dragging.
+	
+	if not dragging:
+		return
+		
+	# Update Position
+	if event is InputEventMouseMotion:
+		global_position = get_global_mouse_position() + drag_offset
+
+	# Stop Dragging
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+		dragging = false
+		
+		# Reset Visuals
+		z_index = original_z_index
+		scale = original_scale
+		
+		# Check if we dropped on something valid here
+		_check_drop_zone()
+
+
+func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	# Start Dragging
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			dragging = true
+			# Calculate the difference between mouse and object position
+			# This prevents the object's center from snapping to the mouse immediately
+			drag_offset = global_position - get_global_mouse_position()
+			
+			# Visual feedback
+			original_scale = scale
+			original_z_index = z_index
+			z_index = 100 # Bring to front
+			scale = original_scale * 1.1 # Slight pop effect
+
+
+func _check_drop_zone() -> void:
+	print("Dropped at: ", global_position)
+	# Add logic here: "If distance to board < 50, snap to board slot"
