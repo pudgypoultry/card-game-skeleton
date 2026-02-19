@@ -49,7 +49,7 @@ This addon provides a workflow for designing cards, managing data, building deck
 2.  Copy the `addons/CardGameSkeleton` folder into your Godot project's `res://addons/` directory.
 3.  Open **Project > Project Settings > Plugins**.
 4.  Enable **CardGameSkeleton**.
-5.  A new tab called **"Card CMS"** (or your custom name) will appear in the bottom panel.
+5.  A new tab called **"Card Game Skeleton"** (or your custom name) will appear in the top left panel.
 
 ## Getting Started
 
