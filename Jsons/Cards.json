@@ -1,0 +1,16 @@
+{
+	"T2": {
+		"Card Name": "T2",
+		"Front Face Location": "",
+		"Rank": 0.0,
+		"Scene Location": "res://Cards/T2/",
+		"Suit": "Clubs"
+	},
+	"Test1": {
+		"Card Name": "Test1",
+		"Front Face Location": "",
+		"Rank": 0.0,
+		"Scene Location": "res://Cards/Test1/",
+		"Suit": "Clubs"
+	}
+}

@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://covcvkru51l5k"]
+[gd_scene format=3 uid="uid://covcvkru51l5k"]
 
 [ext_resource type="Script" uid="uid://dfryrq3m4c340" path="res://addons/CardGameSkeleton/Menus/PathSettingsMenu.gd" id="1_30mxb"]
 
-[node name="PathSettingsMenu" type="MarginContainer"]
+[node name="PathSettingsMenu" type="MarginContainer" unique_id=244280907]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -11,83 +11,103 @@ grow_vertical = 2
 size_flags_horizontal = 3
 script = ExtResource("1_30mxb")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1068706766]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1957675242]
 layout_mode = 2
 
-[node name="BackButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="BackButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1274697168]
 layout_mode = 2
 text = "< Back"
 
-[node name="ProjectPathSettings" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="ProjectPathSettings" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=36969875]
 layout_mode = 2
 text = "Project Path Settings"
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=281860224]
 layout_mode = 2
 
-[node name="MasterCardDirectory" type="Label" parent="VBoxContainer"]
+[node name="MasterCardDirectory" type="Label" parent="VBoxContainer" unique_id=1368140148]
 layout_mode = 2
 text = "Master Card Directory"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=1985465261]
 layout_mode = 2
 
-[node name="PathInput" type="LineEdit" parent="VBoxContainer/HBoxContainer2"]
+[node name="PathInput" type="LineEdit" parent="VBoxContainer/HBoxContainer2" unique_id=769662418]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 
-[node name="SaveButton" type="Button" parent="VBoxContainer/HBoxContainer2"]
+[node name="SaveButton" type="Button" parent="VBoxContainer/HBoxContainer2" unique_id=1083888955]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Save"
 
-[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer" unique_id=179317908]
 layout_mode = 2
 
-[node name="SubfolderCheckbox" type="CheckButton" parent="VBoxContainer"]
+[node name="SubfolderCheckbox" type="CheckButton" parent="VBoxContainer" unique_id=1011800870]
 layout_mode = 2
 text = "Create subfolder for each card using the card name?"
 
-[node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer" unique_id=1967622109]
 layout_mode = 2
 
-[node name="CustomCardBaseScene" type="Label" parent="VBoxContainer"]
+[node name="CustomCardBaseScene" type="Label" parent="VBoxContainer" unique_id=701321471]
 layout_mode = 2
 text = "Custom Card Template Scene Path (Optional)"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer" unique_id=1816674707]
 layout_mode = 2
 
-[node name="CustomCardPathInput" type="LineEdit" parent="VBoxContainer/HBoxContainer3"]
+[node name="CustomCardPathInput" type="LineEdit" parent="VBoxContainer/HBoxContainer3" unique_id=1205218395]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 placeholder_text = "res://MyCustomCardScene.tscn"
 
-[node name="SaveButton" type="Button" parent="VBoxContainer/HBoxContainer3"]
+[node name="SaveButton" type="Button" parent="VBoxContainer/HBoxContainer3" unique_id=1556782433]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Save"
 
-[node name="HSeparator4" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator4" type="HSeparator" parent="VBoxContainer" unique_id=1042461464]
 layout_mode = 2
 
-[node name="ChangeBaseCardScript" type="Label" parent="VBoxContainer"]
+[node name="ChangeBaseCardScript" type="Label" parent="VBoxContainer" unique_id=586938362]
 layout_mode = 2
 text = "Change Location of Base Card Script"
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer" unique_id=675582146]
 layout_mode = 2
 
-[node name="BaseScriptInput" type="LineEdit" parent="VBoxContainer/HBoxContainer4"]
+[node name="BaseScriptInput" type="LineEdit" parent="VBoxContainer/HBoxContainer4" unique_id=2033190459]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 placeholder_text = "Enter new base card script location"
 
-[node name="RetargetButton" type="Button" parent="VBoxContainer/HBoxContainer4"]
+[node name="RetargetButton" type="Button" parent="VBoxContainer/HBoxContainer4" unique_id=1205495372]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Save"
+
+[node name="HSeparator5" type="HSeparator" parent="VBoxContainer" unique_id=1101233146]
+layout_mode = 2
+
+[node name="ChangeBaseCardScript2" type="Label" parent="VBoxContainer" unique_id=524553324]
+layout_mode = 2
+text = "Change Location of Card And Deck Json"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="VBoxContainer" unique_id=1477538845]
+layout_mode = 2
+
+[node name="JsonPathInput" type="LineEdit" parent="VBoxContainer/HBoxContainer5" unique_id=1047255372]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+placeholder_text = "Enter new base card script location"
+
+[node name="SaveJsonPathButton" type="Button" parent="VBoxContainer/HBoxContainer5" unique_id=822188777]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Save"
