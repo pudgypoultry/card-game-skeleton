@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CardProjectSettings" load_steps=8 format=3 uid="uid://djc5t44vso6ar"]
+[gd_resource type="Resource" script_class="CardProjectSettings" format=3 uid="uid://djc5t44vso6ar"]
 
 [ext_resource type="Script" uid="uid://u7rekoppl5mn" path="res://addons/CardGameSkeleton/Resources/CardAttribute.gd" id="1_uk7gn"]
 [ext_resource type="Script" uid="uid://c6ghph748ex5o" path="res://addons/CardGameSkeleton/Resources/CardProjectSettings.gd" id="2_o5oo0"]
@@ -28,6 +28,7 @@ selection_options = Array[String](["Clubs", "Diamonds", "Hearts", "Spades"])
 
 [resource]
 script = ExtResource("2_o5oo0")
+json_root_directory = null
 custom_attributes = Array[ExtResource("1_uk7gn")]([SubResource("Resource_uk7gn"), SubResource("Resource_cxecs"), SubResource("Resource_qslpy"), SubResource("Resource_o5oo0"), SubResource("Resource_d4nsh")])
 custom_card_scene_path = "res://Cards/AbstractCard2D.tscn"
 base_card_script_path = "res://addons/CardGameSkeleton/CardLibrary/Card.gd"

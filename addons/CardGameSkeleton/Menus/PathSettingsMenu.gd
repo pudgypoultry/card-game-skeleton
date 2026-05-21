@@ -12,6 +12,8 @@ extends MarginContainer
 @onready var card_button_save_path : Button = $VBoxContainer/HBoxContainer3/SaveButton
 @onready var base_script_input: LineEdit = $VBoxContainer/HBoxContainer4/BaseScriptInput
 @onready var retarget_button: Button = $VBoxContainer/HBoxContainer4/RetargetButton
+@onready var json_path_input: LineEdit = $VBoxContainer/HBoxContainer5/JsonPathInput
+@onready var save_json_path_button: Button = $VBoxContainer/HBoxContainer5/SaveJsonPathButton
 
 func _ready() -> void:
 	save_button.pressed.connect(_on_template_path_save_pressed)
@@ -20,12 +22,14 @@ func _ready() -> void:
 	visibility_changed.connect(_on_visibility_changed)
 	retarget_button.pressed.connect(_on_retarget_pressed)
 	subfolder_checkbox.toggled.connect(_on_subfolder_toggled)
+	save_json_path_button.pressed.connect(_on_save_json_path_button_pressed)
 
 
 func _on_visibility_changed() -> void:
 	if visible and card_library and card_library.settings_resource:
 		path_input.text = card_library.settings_resource.card_root_directory
 		template_path_input.text = card_library.settings_resource.custom_card_scene_path
+		json_path_input.text = card_library.settings_resource.json_root_directory
 		
 		var is_subfolder = (card_library.settings_resource.storage_style == CardProjectSettings.StorageStyle.SUBFOLDER)
 		subfolder_checkbox.button_pressed = is_subfolder
@@ -165,3 +169,12 @@ func _on_subfolder_toggled(toggled_on: bool) -> void:
 		print("Settings Auto-Saved.")
 	else:
 		push_error("Error auto-saving settings: " + str(err))
+
+func _on_save_json_path_button_pressed() -> void:
+	var new_path = json_path_input.text.strip_edges()
+	if not new_path.ends_with("/"):
+		new_path += "/"
+		json_path_input.text = new_path
+	card_library.settings_resource.json_root_directory = new_path
+	# 🔥 关键一行：让 CardLibrary 重新计算内部路径成员变量
+	card_library._update_json_paths()

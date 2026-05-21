@@ -1,28 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6bwhncl0xgm1"]
+[gd_scene format=3 uid="uid://c6bwhncl0xgm1"]
 
 [ext_resource type="PackedScene" uid="uid://y0inqbup405e" path="res://ExampleScene/DeckExample.tscn" id="1_5l1u3"]
 
-[node name="DeckToy" type="Node2D"]
+[node name="DeckToy" type="Node2D" unique_id=506135129]
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1957053845]
 offset = Vector2(576, 323)
 
-[node name="DeckExample" parent="." instance=ExtResource("1_5l1u3")]
+[node name="DeckExample" parent="." unique_id=1647008698 instance=ExtResource("1_5l1u3")]
 position = Vector2(974, 471)
 scale = Vector2(0.18599343, 0.18599343)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=501024931]
 custom_minimum_size = Vector2(200, 0)
 offset_right = 40.0
 offset_bottom = 40.0
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="DrawButton" type="Button" parent="VBoxContainer"]
+[node name="DrawButton" type="Button" parent="VBoxContainer" unique_id=1140194036]
 layout_mode = 2
 text = "Draw Card"
 
-[node name="ShuffleButton" type="Button" parent="VBoxContainer"]
+[node name="ShuffleButton" type="Button" parent="VBoxContainer" unique_id=263531764]
 layout_mode = 2
 text = "Shuffle Deck"
 
